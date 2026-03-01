@@ -1,32 +1,38 @@
 #!/usr/bin/env python3
 """
-Bars Judge Agent - Avaliador de 500 Temas/Problemas de Startup
-==============================================================
+Bars Judge Agent - Avaliador de Temas/Problemas de Startup
+==========================================================
 
-Agente que avalia ~500 problemas/oportunidades usando o framework de avaliação
-baseado em Y Combinator, Lean Startup, Peter Thiel, Reid Hoffman e outros.
+Banco de problemas com sistema de batches por data e ranking geral unificado.
 
-Modos de operação:
-    --mode api       : Usa a API do Claude para avaliar (mais preciso, requer ANTHROPIC_API_KEY)
-    --mode heuristic : Usa análise textual heurística (rápido, sem API)
+Estrutura:
+    batches/                             # Diretório de batches
+    ├── 2026-03-01_initial/             # Batch nomeado por data
+    │   ├── *.csv                       # CSVs de problemas (Problema, Descrição Geral, Desenvolvimento)
+    │   └── avaliacao_batch.json        # Resultados da avaliação deste batch
+    ├── 2026-03-15_novos/               # Novos batches futuros
+    │   └── ...
+    banco_geral_dados.json              # Banco consolidado com todas as avaliações
+    banco_geral_ranking.csv             # CSV FINAL unificado com ranking geral
 
-Uso:
-    # Modo heurístico (sem API key necessária)
-    python bars_judge_agent.py --mode heuristic
+Comandos:
+    # Adicionar novo batch de problemas (CSV ou diretório)
+    python bars_judge_agent.py add-batch problemas_novos.csv --name "temas_clima"
+    python bars_judge_agent.py add-batch /caminho/para/csvs/ --name "fase_6"
 
-    # Modo API (requer API key)
-    export ANTHROPIC_API_KEY="sua-chave-aqui"
-    python bars_judge_agent.py --mode api
+    # Avaliar batches pendentes (que ainda não foram avaliados)
+    python bars_judge_agent.py evaluate
+    python bars_judge_agent.py evaluate --batch 2026-03-01_initial
+    python bars_judge_agent.py evaluate --mode api --model claude-sonnet-4-20250514
 
-    # Executar com limite de problemas (para teste)
-    python bars_judge_agent.py --mode heuristic --limit 10
+    # Reconstruir ranking geral a partir de todos os batches avaliados
+    python bars_judge_agent.py rebuild
 
-    # Retomar execução anterior (usa checkpoint)
-    python bars_judge_agent.py --mode api --resume
+    # Ver status dos batches e ranking
+    python bars_judge_agent.py status
 
-Saída:
-    - avaliacao_500_temas_ranking.csv (CSV unificado com todas as pontuações e ranking)
-    - checkpoint_avaliacao.json (checkpoint para retomada)
+    # Importar CSVs legados (já existentes na raiz) como batch inicial
+    python bars_judge_agent.py import-legacy
 """
 
 import csv
@@ -34,10 +40,12 @@ import json
 import math
 import os
 import re
+import shutil
 import sys
 import time
 import argparse
 import glob as glob_module
+from datetime import date
 from pathlib import Path
 from typing import Optional
 
@@ -46,6 +54,15 @@ try:
     HAS_ANTHROPIC = True
 except ImportError:
     HAS_ANTHROPIC = False
+
+# ============================================================================
+# CONSTANTES DE ESTRUTURA
+# ============================================================================
+
+BATCHES_DIR = "batches"
+BANCO_GERAL_JSON = "banco_geral_dados.json"
+BANCO_GERAL_CSV = "banco_geral_ranking.csv"
+BATCH_EVAL_FILE = "avaliacao_batch.json"
 
 # ============================================================================
 # FRAMEWORK DE AVALIAÇÃO
@@ -337,45 +354,285 @@ def calcular_pontuacoes(notas: dict) -> dict:
 # LEITURA DOS CSVs
 # ============================================================================
 
-def carregar_problemas(diretorio: str) -> list[dict]:
-    """Carrega todos os problemas dos CSVs no diretório."""
+def carregar_problemas_de_csv(caminho_csv: str, nome_batch: str = "") -> list[dict]:
+    """Carrega problemas de um único arquivo CSV."""
+    problemas = []
+    nome_arquivo = os.path.basename(caminho_csv)
+
+    for encoding in ["utf-8-sig", "utf-8", "latin-1"]:
+        try:
+            with open(caminho_csv, "r", encoding=encoding) as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    problema = row.get("Problema", "").strip().strip('"')
+                    descricao = row.get("Descrição Geral", row.get("Descri\u00e7\u00e3o Geral", "")).strip().strip('"')
+                    desenvolvimento = row.get("Desenvolvimento", "").strip().strip('"')
+
+                    if problema:
+                        problemas.append({
+                            "arquivo_fonte": nome_arquivo,
+                            "batch": nome_batch,
+                            "problema": problema,
+                            "descricao": descricao,
+                            "desenvolvimento": desenvolvimento,
+                        })
+                break
+        except (UnicodeDecodeError, KeyError):
+            continue
+
+    return problemas
+
+
+def carregar_problemas_de_diretorio(diretorio: str, nome_batch: str = "") -> list[dict]:
+    """Carrega todos os problemas dos CSVs num diretório."""
     problemas = []
     arquivos_csv = sorted(glob_module.glob(os.path.join(diretorio, "*.csv")))
 
-    if not arquivos_csv:
-        print(f"ERRO: Nenhum arquivo CSV encontrado em {diretorio}")
+    for arquivo in arquivos_csv:
+        novos = carregar_problemas_de_csv(arquivo, nome_batch)
+        if novos:
+            print(f"    {os.path.basename(arquivo)}: {len(novos)} problemas")
+        problemas.extend(novos)
+
+    return problemas
+
+
+def carregar_problemas(diretorio: str) -> list[dict]:
+    """Carrega todos os problemas dos CSVs no diretório (compatibilidade legado)."""
+    print("Carregando problemas dos CSVs...")
+    problemas = carregar_problemas_de_diretorio(diretorio)
+    if not problemas:
+        print(f"ERRO: Nenhum problema encontrado em {diretorio}")
+        sys.exit(1)
+    print(f"  Total: {len(problemas)} problemas carregados")
+    return problemas
+
+
+# ============================================================================
+# GESTÃO DE BATCHES
+# ============================================================================
+
+def _batches_dir(base: str) -> str:
+    """Retorna o caminho do diretório de batches, criando se necessário."""
+    d = os.path.join(base, BATCHES_DIR)
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
+def listar_batches(base: str) -> list[dict]:
+    """Lista todos os batches com seu status."""
+    bdir = _batches_dir(base)
+    batches = []
+    for entry in sorted(os.listdir(bdir)):
+        batch_path = os.path.join(bdir, entry)
+        if not os.path.isdir(batch_path):
+            continue
+
+        csvs = glob_module.glob(os.path.join(batch_path, "*.csv"))
+        eval_path = os.path.join(batch_path, BATCH_EVAL_FILE)
+        avaliado = os.path.exists(eval_path)
+
+        n_problemas = 0
+        for c in csvs:
+            n_problemas += len(carregar_problemas_de_csv(c, entry))
+
+        n_avaliados = 0
+        if avaliado:
+            with open(eval_path, "r", encoding="utf-8") as f:
+                n_avaliados = len(json.load(f))
+
+        batches.append({
+            "nome": entry,
+            "caminho": batch_path,
+            "n_csvs": len(csvs),
+            "n_problemas": n_problemas,
+            "avaliado": avaliado,
+            "n_avaliados": n_avaliados,
+        })
+
+    return batches
+
+
+def adicionar_batch(base: str, fonte: str, nome: Optional[str] = None) -> str:
+    """Adiciona um novo batch de problemas (arquivo CSV ou diretório de CSVs)."""
+    hoje = date.today().isoformat()
+    sufixo = nome if nome else "novos"
+    batch_nome = f"{hoje}_{sufixo}"
+    batch_dir = os.path.join(_batches_dir(base), batch_nome)
+
+    if os.path.exists(batch_dir):
+        # Adicionar timestamp para evitar conflito
+        batch_nome = f"{hoje}_{sufixo}_{int(time.time()) % 10000}"
+        batch_dir = os.path.join(_batches_dir(base), batch_nome)
+
+    os.makedirs(batch_dir, exist_ok=True)
+
+    fonte_abs = os.path.abspath(fonte)
+
+    if os.path.isfile(fonte_abs) and fonte_abs.endswith(".csv"):
+        shutil.copy2(fonte_abs, batch_dir)
+        problemas = carregar_problemas_de_csv(
+            os.path.join(batch_dir, os.path.basename(fonte_abs)), batch_nome
+        )
+        print(f"  Copiado: {os.path.basename(fonte_abs)} -> batches/{batch_nome}/")
+    elif os.path.isdir(fonte_abs):
+        csvs = glob_module.glob(os.path.join(fonte_abs, "*.csv"))
+        if not csvs:
+            print(f"ERRO: Nenhum CSV encontrado em {fonte_abs}")
+            sys.exit(1)
+        for c in csvs:
+            shutil.copy2(c, batch_dir)
+            print(f"  Copiado: {os.path.basename(c)} -> batches/{batch_nome}/")
+        problemas = carregar_problemas_de_diretorio(batch_dir, batch_nome)
+    else:
+        print(f"ERRO: '{fonte}' não é um CSV válido nem um diretório.")
         sys.exit(1)
 
-    for arquivo in arquivos_csv:
-        nome_arquivo = os.path.basename(arquivo)
-        print(f"  Carregando: {nome_arquivo}")
+    print(f"\nBatch '{batch_nome}' criado com {len(problemas)} problemas.")
+    print(f"  Caminho: {batch_dir}")
+    print(f"  Execute: python bars_judge_agent.py evaluate --batch {batch_nome}")
+    return batch_nome
 
-        # Tentar diferentes encodings
-        for encoding in ["utf-8-sig", "utf-8", "latin-1"]:
-            try:
-                with open(arquivo, "r", encoding=encoding) as f:
-                    reader = csv.DictReader(f)
-                    count = 0
-                    for row in reader:
-                        problema = row.get("Problema", "").strip().strip('"')
-                        descricao = row.get("Descrição Geral", row.get("Descri\u00e7\u00e3o Geral", "")).strip().strip('"')
-                        desenvolvimento = row.get("Desenvolvimento", "").strip().strip('"')
 
-                        if problema:
-                            problemas.append({
-                                "arquivo_fonte": nome_arquivo,
-                                "problema": problema,
-                                "descricao": descricao,
-                                "desenvolvimento": desenvolvimento,
-                            })
-                            count += 1
-                    print(f"    -> {count} problemas carregados")
-                    break
-            except (UnicodeDecodeError, KeyError):
-                continue
+def importar_legacy(base: str) -> str:
+    """Importa os CSVs existentes na raiz como batch inicial."""
+    csvs_raiz = sorted(glob_module.glob(os.path.join(base, "*.csv")))
+    # Filtrar o CSV de ranking (saída do agente)
+    csvs_raiz = [c for c in csvs_raiz if "avaliacao_" not in os.path.basename(c)
+                 and "banco_geral" not in os.path.basename(c)]
 
-    print(f"\nTotal de problemas carregados: {len(problemas)}")
-    return problemas
+    if not csvs_raiz:
+        print("Nenhum CSV legado encontrado na raiz.")
+        return ""
+
+    batch_nome = "2026-03-01_initial"
+    batch_dir = os.path.join(_batches_dir(base), batch_nome)
+
+    if os.path.exists(batch_dir):
+        print(f"Batch '{batch_nome}' já existe. Pulando importação.")
+        return batch_nome
+
+    os.makedirs(batch_dir, exist_ok=True)
+
+    total = 0
+    for c in csvs_raiz:
+        shutil.copy2(c, batch_dir)
+        n = len(carregar_problemas_de_csv(c))
+        print(f"  Copiado: {os.path.basename(c)} ({n} problemas)")
+        total += n
+
+    print(f"\nBatch legacy '{batch_nome}' criado com {total} problemas.")
+    return batch_nome
+
+
+def avaliar_batch(base: str, batch_nome: str, mode: str = "heuristic",
+                  model: str = "claude-sonnet-4-20250514", client=None) -> list[dict]:
+    """Avalia todos os problemas de um batch."""
+    batch_dir = os.path.join(_batches_dir(base), batch_nome)
+    if not os.path.isdir(batch_dir):
+        print(f"ERRO: Batch '{batch_nome}' não encontrado em {batch_dir}")
+        return []
+
+    # Carregar problemas do batch
+    problemas = carregar_problemas_de_diretorio(batch_dir, batch_nome)
+    if not problemas:
+        print(f"  Nenhum problema encontrado no batch '{batch_nome}'.")
+        return []
+
+    # Verificar se já existe avaliação parcial
+    eval_path = os.path.join(batch_dir, BATCH_EVAL_FILE)
+    resultados = []
+    avaliados = set()
+    if os.path.exists(eval_path):
+        with open(eval_path, "r", encoding="utf-8") as f:
+            resultados = json.load(f)
+        avaliados = {r["problema"] for r in resultados}
+        print(f"  Retomando: {len(resultados)} já avaliados de {len(problemas)}")
+
+    pendentes = [p for p in problemas if p["problema"] not in avaliados]
+    total = len(problemas)
+
+    print(f"  Avaliando {len(pendentes)} problemas pendentes no batch '{batch_nome}'...")
+
+    for i, problema in enumerate(pendentes, 1):
+        idx = len(resultados) + 1
+        if i % 50 == 1 or i == len(pendentes):
+            print(f"    [{idx}/{total}] {problema['problema'][:55]}...")
+
+        if mode == "api" and client:
+            notas = avaliar_problema(client, problema, model)
+        else:
+            notas = avaliar_problema_heuristico(problema)
+
+        if notas is None:
+            continue
+
+        pontuacoes = calcular_pontuacoes(notas)
+        resultado = {
+            "problema": problema["problema"],
+            "descricao": problema["descricao"],
+            "desenvolvimento": problema["desenvolvimento"],
+            "arquivo_fonte": problema["arquivo_fonte"],
+            "batch": batch_nome,
+            "notas": notas,
+            **pontuacoes,
+        }
+        resultados.append(resultado)
+
+        # Checkpoint a cada 20
+        if idx % 20 == 0:
+            with open(eval_path, "w", encoding="utf-8") as f:
+                json.dump(resultados, f, ensure_ascii=False, indent=2)
+
+        if mode == "api":
+            time.sleep(0.5)
+
+    # Salvar avaliação completa do batch
+    with open(eval_path, "w", encoding="utf-8") as f:
+        json.dump(resultados, f, ensure_ascii=False, indent=2)
+
+    print(f"  Batch '{batch_nome}' concluído: {len(resultados)} problemas avaliados.")
+    return resultados
+
+
+# ============================================================================
+# BANCO GERAL (CONSOLIDAÇÃO)
+# ============================================================================
+
+def consolidar_banco_geral(base: str) -> list[dict]:
+    """Consolida todos os batches avaliados num único banco de dados."""
+    bdir = _batches_dir(base)
+    todos_resultados = []
+
+    for entry in sorted(os.listdir(bdir)):
+        eval_path = os.path.join(bdir, entry, BATCH_EVAL_FILE)
+        if os.path.exists(eval_path):
+            with open(eval_path, "r", encoding="utf-8") as f:
+                batch_results = json.load(f)
+            # Garantir que cada resultado tenha o campo batch
+            for r in batch_results:
+                r.setdefault("batch", entry)
+            todos_resultados.extend(batch_results)
+            print(f"  Batch '{entry}': {len(batch_results)} problemas")
+
+    # Deduplicar por nome do problema (manter o mais recente)
+    vistos = {}
+    for r in todos_resultados:
+        vistos[r["problema"]] = r
+    todos_resultados = list(vistos.values())
+
+    # Salvar banco geral JSON
+    banco_path = os.path.join(base, BANCO_GERAL_JSON)
+    with open(banco_path, "w", encoding="utf-8") as f:
+        json.dump(todos_resultados, f, ensure_ascii=False, indent=2)
+
+    print(f"\nBanco geral consolidado: {len(todos_resultados)} problemas únicos")
+    return todos_resultados
+
+
+def gerar_ranking_geral(resultados: list[dict], base: str) -> str:
+    """Gera o CSV de ranking geral unificado."""
+    return gerar_csv_final(resultados, base, nome_arquivo=BANCO_GERAL_CSV)
 
 
 # ============================================================================
@@ -1149,7 +1406,8 @@ def carregar_checkpoint(diretorio: str) -> list[dict]:
 # GERAÇÃO DO CSV FINAL
 # ============================================================================
 
-def gerar_csv_final(resultados: list[dict], diretorio: str) -> str:
+def gerar_csv_final(resultados: list[dict], diretorio: str,
+                    nome_arquivo: str = "avaliacao_500_temas_ranking.csv") -> str:
     """Gera o CSV final unificado com todas as pontuações e ranking."""
 
     # Ordenar por total_geral (decrescente)
@@ -1162,6 +1420,7 @@ def gerar_csv_final(resultados: list[dict], diretorio: str) -> str:
     # Definir colunas do CSV
     colunas = [
         "ranking",
+        "batch",
         "problema",
         "descricao",
         "desenvolvimento",
@@ -1187,6 +1446,7 @@ def gerar_csv_final(resultados: list[dict], diretorio: str) -> str:
     for r in resultados_ordenados:
         linha = {
             "ranking": r["ranking"],
+            "batch": r.get("batch", ""),
             "problema": r["problema"],
             "descricao": r.get("descricao", ""),
             "desenvolvimento": r.get("desenvolvimento", ""),
@@ -1214,13 +1474,14 @@ def gerar_csv_final(resultados: list[dict], diretorio: str) -> str:
         linhas.append(linha)
 
     # Escrever CSV
-    output_path = os.path.join(diretorio, "avaliacao_500_temas_ranking.csv")
+    output_path = os.path.join(diretorio, nome_arquivo)
     with open(output_path, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=colunas, quoting=csv.QUOTE_ALL)
 
         # Header com nomes legíveis
         header_names = {
             "ranking": "Ranking",
+            "batch": "Batch",
             "problema": "Problema",
             "descricao": "Descrição Geral",
             "desenvolvimento": "Desenvolvimento",
@@ -1277,141 +1538,232 @@ def gerar_csv_final(resultados: list[dict], diretorio: str) -> str:
 
 
 # ============================================================================
-# MAIN
+# MAIN - SUBCOMANDOS
 # ============================================================================
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Bars Judge Agent - Avaliador de 500 Temas de Startup"
-    )
-    parser.add_argument(
-        "--mode", type=str, default="heuristic", choices=["api", "heuristic"],
-        help="Modo de avaliação: 'api' (usa Claude API) ou 'heuristic' (análise textual local, default)"
-    )
-    parser.add_argument(
-        "--limit", type=int, default=0,
-        help="Limitar número de problemas a avaliar (0 = todos)"
-    )
-    parser.add_argument(
-        "--resume", action="store_true",
-        help="Retomar avaliação anterior a partir do checkpoint"
-    )
-    parser.add_argument(
-        "--model", type=str, default="claude-sonnet-4-20250514",
-        help="Modelo Claude a usar no modo API (default: claude-sonnet-4-20250514)"
-    )
-    parser.add_argument(
-        "--dir", type=str, default=".",
-        help="Diretório com os arquivos CSV (default: diretório atual)"
-    )
-    parser.add_argument(
-        "--batch-size", type=int, default=10,
-        help="Salvar checkpoint a cada N avaliações (default: 10)"
-    )
-    args = parser.parse_args()
+def _setup_api_client(args) -> Optional[object]:
+    """Configura cliente da API Anthropic se necessário."""
+    if args.mode != "api":
+        return None
+    if not HAS_ANTHROPIC:
+        print("ERRO: Pacote 'anthropic' não instalado. Execute: pip install anthropic")
+        sys.exit(1)
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        print("ERRO: ANTHROPIC_API_KEY não configurada.")
+        print("Use --mode heuristic para avaliação sem API.")
+        sys.exit(1)
+    return anthropic.Anthropic(api_key=api_key)
 
-    diretorio = os.path.abspath(args.dir)
 
+def cmd_add_batch(args):
+    """Subcomando: adicionar novo batch de problemas."""
+    base = os.path.abspath(args.dir)
     print("=" * 80)
-    print("BARS JUDGE AGENT - Avaliador de Temas de Startup")
+    print("BARS JUDGE AGENT - Adicionar Batch")
     print("=" * 80)
-    print(f"Diretório: {diretorio}")
+
+    batch_nome = adicionar_batch(base, args.fonte, args.name)
+    return 0
+
+
+def cmd_import_legacy(args):
+    """Subcomando: importar CSVs legados como batch inicial."""
+    base = os.path.abspath(args.dir)
+    print("=" * 80)
+    print("BARS JUDGE AGENT - Importar CSVs Legados")
+    print("=" * 80)
+
+    batch_nome = importar_legacy(base)
+    if not batch_nome:
+        return 1
+
+    # Avaliar automaticamente o batch importado
+    print(f"\nAvaliando batch importado '{batch_nome}'...")
+    client = _setup_api_client(args)
+    resultados = avaliar_batch(base, batch_nome, args.mode,
+                               getattr(args, "model", "claude-sonnet-4-20250514"), client)
+
+    # Consolidar e gerar ranking
+    print("\nConsolidando banco geral...")
+    todos = consolidar_banco_geral(base)
+    if todos:
+        gerar_ranking_geral(todos, base)
+
+    return 0
+
+
+def cmd_evaluate(args):
+    """Subcomando: avaliar batches pendentes."""
+    base = os.path.abspath(args.dir)
+    print("=" * 80)
+    print("BARS JUDGE AGENT - Avaliar Batches")
+    print("=" * 80)
     print(f"Modo: {args.mode.upper()}")
     if args.mode == "api":
         print(f"Modelo: {args.model}")
-    print(f"Limite: {'Todos' if args.limit == 0 else args.limit}")
-    print(f"Retomar: {'Sim' if args.resume else 'Não'}")
     print()
 
-    # Configurar cliente API se necessário
-    client = None
-    if args.mode == "api":
-        if not HAS_ANTHROPIC:
-            print("ERRO: Pacote 'anthropic' não instalado.")
-            print("Execute: pip install anthropic")
-            sys.exit(1)
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key:
-            print("ERRO: Variável de ambiente ANTHROPIC_API_KEY não configurada.")
-            print("Execute: export ANTHROPIC_API_KEY='sua-chave-aqui'")
-            print("Ou use --mode heuristic para avaliação sem API.")
-            sys.exit(1)
-        client = anthropic.Anthropic(api_key=api_key)
+    client = _setup_api_client(args)
+    batches = listar_batches(base)
 
-    # Carregar problemas
-    print("Carregando problemas dos CSVs...")
-    problemas = carregar_problemas(diretorio)
+    if not batches:
+        print("Nenhum batch encontrado. Use 'add-batch' ou 'import-legacy' primeiro.")
+        return 1
 
-    if args.limit > 0:
-        problemas = problemas[:args.limit]
-        print(f"Limitado a {args.limit} problemas.")
-
-    # Carregar checkpoint se retomando
-    resultados = []
-    problemas_avaliados = set()
-    if args.resume:
-        resultados = carregar_checkpoint(diretorio)
-        problemas_avaliados = {r["problema"] for r in resultados}
-        print(f"Checkpoint carregado: {len(resultados)} problemas já avaliados.")
-
-    # Avaliar problemas
-    total = len(problemas)
-    pendentes = [p for p in problemas if p["problema"] not in problemas_avaliados]
-    print(f"\nProblemas pendentes: {len(pendentes)} de {total}")
-    print("-" * 80)
-
-    for i, problema in enumerate(pendentes, 1):
-        idx_global = len(resultados) + 1
-        print(f"[{idx_global}/{total}] Avaliando: {problema['problema'][:60]}...")
-
-        if args.mode == "api":
-            notas = avaliar_problema(client, problema, args.model)
-        else:
-            notas = avaliar_problema_heuristico(problema)
-
-        if notas is None:
-            print(f"  FALHA ao avaliar. Pulando...")
-            continue
-
-        # Calcular pontuações
-        pontuacoes = calcular_pontuacoes(notas)
-
-        resultado = {
-            "problema": problema["problema"],
-            "descricao": problema["descricao"],
-            "desenvolvimento": problema["desenvolvimento"],
-            "arquivo_fonte": problema["arquivo_fonte"],
-            "notas": notas,
-            **pontuacoes,
-        }
-
-        resultados.append(resultado)
-
-        # Exibir resumo compacto
-        if i % 50 == 0 or i == len(pendentes):
-            print(f"  ... {idx_global} avaliados | Último: {pontuacoes['total_geral']}/{pontuacoes['max_total']} "
-                  f"({pontuacoes['pct_total']}%)")
-
-        # Checkpoint periódico
-        if idx_global % args.batch_size == 0:
-            salvar_checkpoint(resultados, diretorio)
-
-        # Rate limiting apenas para modo API
-        if args.mode == "api":
-            time.sleep(0.5)
-
-    # Salvar checkpoint final
-    salvar_checkpoint(resultados, diretorio)
-    print(f"\nCheckpoint final salvo: {len(resultados)} avaliações.")
-
-    # Gerar CSV final
-    if resultados:
-        output_path = gerar_csv_final(resultados, diretorio)
-        print(f"\nProcesso concluído! Arquivo: {output_path}")
+    # Filtrar por batch específico ou avaliar todos pendentes
+    if args.batch:
+        batches = [b for b in batches if b["nome"] == args.batch]
+        if not batches:
+            print(f"Batch '{args.batch}' não encontrado.")
+            return 1
     else:
-        print("\nNenhum resultado para gerar CSV.")
+        # Apenas batches não completamente avaliados
+        pendentes = [b for b in batches if b["n_avaliados"] < b["n_problemas"]]
+        if not pendentes:
+            print("Todos os batches já foram avaliados!")
+            # Rebuild ranking mesmo assim
+            todos = consolidar_banco_geral(base)
+            if todos:
+                gerar_ranking_geral(todos, base)
+            return 0
+        batches = pendentes
+
+    for b in batches:
+        print(f"\n{'─' * 60}")
+        print(f"Batch: {b['nome']} ({b['n_problemas']} problemas, {b['n_avaliados']} avaliados)")
+        print(f"{'─' * 60}")
+        avaliar_batch(base, b["nome"], args.mode,
+                      getattr(args, "model", "claude-sonnet-4-20250514"), client)
+
+    # Consolidar e gerar ranking
+    print("\n" + "=" * 80)
+    print("Consolidando banco geral...")
+    todos = consolidar_banco_geral(base)
+    if todos:
+        gerar_ranking_geral(todos, base)
 
     return 0
+
+
+def cmd_rebuild(args):
+    """Subcomando: reconstruir ranking geral."""
+    base = os.path.abspath(args.dir)
+    print("=" * 80)
+    print("BARS JUDGE AGENT - Reconstruir Ranking Geral")
+    print("=" * 80)
+
+    todos = consolidar_banco_geral(base)
+    if todos:
+        gerar_ranking_geral(todos, base)
+    else:
+        print("Nenhum dado encontrado. Avalie batches primeiro.")
+        return 1
+    return 0
+
+
+def cmd_status(args):
+    """Subcomando: status dos batches e ranking."""
+    base = os.path.abspath(args.dir)
+    print("=" * 80)
+    print("BARS JUDGE AGENT - Status")
+    print("=" * 80)
+
+    batches = listar_batches(base)
+    if not batches:
+        print("\nNenhum batch encontrado.")
+        print("Use 'import-legacy' para importar CSVs existentes ou 'add-batch' para adicionar novos.")
+        return 0
+
+    total_problemas = 0
+    total_avaliados = 0
+
+    print(f"\n{'Batch':<35s} {'CSVs':>5s} {'Problemas':>10s} {'Avaliados':>10s} {'Status':>10s}")
+    print("─" * 75)
+    for b in batches:
+        status = "OK" if b["avaliado"] and b["n_avaliados"] >= b["n_problemas"] else "PENDENTE"
+        print(f"  {b['nome']:<33s} {b['n_csvs']:>5d} {b['n_problemas']:>10d} "
+              f"{b['n_avaliados']:>10d} {status:>10s}")
+        total_problemas += b["n_problemas"]
+        total_avaliados += b["n_avaliados"]
+
+    print("─" * 75)
+    print(f"  {'TOTAL':<33s} {'':<5s} {total_problemas:>10d} {total_avaliados:>10d}")
+
+    # Verificar banco geral
+    banco_path = os.path.join(base, BANCO_GERAL_CSV)
+    if os.path.exists(banco_path):
+        with open(banco_path, "r", encoding="utf-8-sig") as f:
+            n_linhas = sum(1 for _ in f) - 1
+        print(f"\nRanking geral: {banco_path} ({n_linhas} problemas rankeados)")
+    else:
+        print(f"\nRanking geral: Ainda não gerado. Execute 'rebuild'.")
+
+    return 0
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Bars Judge Agent - Banco de Problemas de Startup com Ranking",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--dir", type=str, default=".",
+        help="Diretório base do projeto (default: diretório atual)"
+    )
+
+    subparsers = parser.add_subparsers(dest="comando", help="Comandos disponíveis")
+
+    # --- add-batch ---
+    p_add = subparsers.add_parser("add-batch", help="Adicionar novo batch de problemas")
+    p_add.add_argument("fonte", help="Arquivo CSV ou diretório com CSVs")
+    p_add.add_argument("--name", type=str, default=None,
+                       help="Sufixo do nome do batch (default: 'novos')")
+
+    # --- import-legacy ---
+    p_legacy = subparsers.add_parser("import-legacy",
+                                      help="Importar CSVs da raiz como batch inicial e avaliar")
+    p_legacy.add_argument("--mode", type=str, default="heuristic",
+                          choices=["api", "heuristic"])
+    p_legacy.add_argument("--model", type=str, default="claude-sonnet-4-20250514")
+
+    # --- evaluate ---
+    p_eval = subparsers.add_parser("evaluate", help="Avaliar batches pendentes")
+    p_eval.add_argument("--batch", type=str, default=None,
+                        help="Nome do batch específico (default: todos pendentes)")
+    p_eval.add_argument("--mode", type=str, default="heuristic",
+                        choices=["api", "heuristic"],
+                        help="Modo de avaliação (default: heuristic)")
+    p_eval.add_argument("--model", type=str, default="claude-sonnet-4-20250514",
+                        help="Modelo Claude para modo API")
+
+    # --- rebuild ---
+    subparsers.add_parser("rebuild", help="Reconstruir ranking geral a partir dos batches")
+
+    # --- status ---
+    subparsers.add_parser("status", help="Mostrar status dos batches e ranking")
+
+    args = parser.parse_args()
+
+    if args.comando is None:
+        parser.print_help()
+        print("\nExemplo rápido:")
+        print("  python bars_judge_agent.py import-legacy    # Importar CSVs existentes")
+        print("  python bars_judge_agent.py status            # Ver status")
+        print("  python bars_judge_agent.py add-batch novo.csv --name clima  # Adicionar batch")
+        print("  python bars_judge_agent.py evaluate          # Avaliar pendentes")
+        print("  python bars_judge_agent.py rebuild           # Reconstruir ranking")
+        return 0
+
+    cmd_map = {
+        "add-batch": cmd_add_batch,
+        "import-legacy": cmd_import_legacy,
+        "evaluate": cmd_evaluate,
+        "rebuild": cmd_rebuild,
+        "status": cmd_status,
+    }
+
+    return cmd_map[args.comando](args)
 
 
 if __name__ == "__main__":
