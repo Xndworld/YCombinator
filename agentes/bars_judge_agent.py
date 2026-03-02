@@ -5,34 +5,23 @@ Bars Judge Agent - Avaliador de Temas/Problemas de Startup
 
 Banco de problemas com sistema de batches por data e ranking geral unificado.
 
-Estrutura:
-    batches/                             # Diretório de batches
+Estrutura (relativa à raiz do projeto):
+    dados/02_problemas/batches/          # Diretório de batches
     ├── 2026-03-01_initial/             # Batch nomeado por data
     │   ├── *.csv                       # CSVs de problemas (Problema, Descrição Geral, Desenvolvimento)
     │   └── avaliacao_batch.json        # Resultados da avaliação deste batch
     ├── 2026-03-15_novos/               # Novos batches futuros
     │   └── ...
-    banco_geral_dados.json              # Banco consolidado com todas as avaliações
-    banco_geral_ranking.csv             # CSV FINAL unificado com ranking geral
+    dados/02_problemas/banco_geral_dados.json    # Banco consolidado com todas as avaliações
+    dados/03_ranking_problemas/banco_geral_ranking.csv  # CSV FINAL unificado com ranking geral
 
-Comandos:
-    # Adicionar novo batch de problemas (CSV ou diretório)
-    python bars_judge_agent.py add-batch problemas_novos.csv --name "temas_clima"
-    python bars_judge_agent.py add-batch /caminho/para/csvs/ --name "fase_6"
-
-    # Avaliar batches pendentes (que ainda não foram avaliados)
-    python bars_judge_agent.py evaluate
-    python bars_judge_agent.py evaluate --batch 2026-03-01_initial
-    python bars_judge_agent.py evaluate --mode api --model claude-sonnet-4-20250514
-
-    # Reconstruir ranking geral a partir de todos os batches avaliados
-    python bars_judge_agent.py rebuild
-
-    # Ver status dos batches e ranking
-    python bars_judge_agent.py status
-
-    # Importar CSVs legados (já existentes na raiz) como batch inicial
-    python bars_judge_agent.py import-legacy
+Comandos (executar da raiz do projeto):
+    python agentes/bars_judge_agent.py add-batch problemas_novos.csv --name "temas_clima"
+    python agentes/bars_judge_agent.py evaluate
+    python agentes/bars_judge_agent.py evaluate --batch 2026-03-01_initial
+    python agentes/bars_judge_agent.py rebuild
+    python agentes/bars_judge_agent.py status
+    python agentes/bars_judge_agent.py import-legacy
 """
 
 import csv
@@ -59,9 +48,13 @@ except ImportError:
 # CONSTANTES DE ESTRUTURA
 # ============================================================================
 
-BATCHES_DIR = "batches"
-BANCO_GERAL_JSON = "banco_geral_dados.json"
-BANCO_GERAL_CSV = "banco_geral_ranking.csv"
+# Raiz do projeto (calculada a partir da localização deste arquivo em agentes/)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Paths relativos à raiz do projeto (usados com os.path.join(base, ...))
+BATCHES_DIR = os.path.join("dados", "02_problemas", "batches")
+BANCO_GERAL_JSON = os.path.join("dados", "02_problemas", "banco_geral_dados.json")
+BANCO_GERAL_CSV = os.path.join("dados", "03_ranking_problemas", "banco_geral_ranking.csv")
 BATCH_EVAL_FILE = "avaliacao_batch.json"
 
 # ============================================================================
@@ -1708,8 +1701,8 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "--dir", type=str, default=".",
-        help="Diretório base do projeto (default: diretório atual)"
+        "--dir", type=str, default=PROJECT_ROOT,
+        help="Diretório base do projeto (default: raiz do projeto)"
     )
 
     subparsers = parser.add_subparsers(dest="comando", help="Comandos disponíveis")

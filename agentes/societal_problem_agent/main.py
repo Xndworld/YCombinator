@@ -2,29 +2,34 @@
 """
 Societal Problem Agent - Ponto de Entrada Principal
 
-Uso:
-    python -m societal_problem_agent.main [opções]
+Uso (da raiz do projeto):
+    python -m agentes.societal_problem_agent.main [opções]
 
 Exemplos:
     # Execução completa (todos os problemas)
-    python -m societal_problem_agent.main
+    python -m agentes.societal_problem_agent.main
 
     # Apenas os primeiros 10 problemas (teste rápido)
-    python -m societal_problem_agent.main --limite 10
+    python -m agentes.societal_problem_agent.main --limite 10
 
     # Com LLM via API (requer ANTHROPIC_API_KEY)
-    python -m societal_problem_agent.main --usar-llm
+    python -m agentes.societal_problem_agent.main --usar-llm
 
     # Apenas mostrar informações do framework
-    python -m societal_problem_agent.main --info
-
-    # Especificar diretório e arquivo de saída
-    python -m societal_problem_agent.main --dir /path/to/csvs --output resultado.csv
+    python -m agentes.societal_problem_agent.main --info
 """
 
 import argparse
 import os
 import sys
+
+# Raiz do projeto (dois níveis acima: agentes/societal_problem_agent/ -> raiz)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+# Diretórios do pipeline
+DIR_PROBLEMAS = os.path.join(PROJECT_ROOT, "dados", "02_problemas")
+DIR_RANKINGS = os.path.join(PROJECT_ROOT, "dados", "03_ranking_problemas")
+DIR_ARTIGOS = os.path.join(PROJECT_ROOT, "dados", "04_artigos_problemas")
 
 
 def criar_llm_evaluator(api_key: str, model: str = "claude-sonnet-4-20250514"):
@@ -85,8 +90,18 @@ Exemplos:
 
     parser.add_argument(
         "--dir",
-        default=".",
-        help="Diretório base com os CSVs de entrada (default: diretório atual)"
+        default=DIR_PROBLEMAS,
+        help="Diretório base com os CSVs de entrada (default: dados/02_problemas)"
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=DIR_RANKINGS,
+        help="Diretório de saída para rankings (default: dados/03_ranking_problemas)"
+    )
+    parser.add_argument(
+        "--artigos-dir",
+        default=DIR_ARTIGOS,
+        help="Diretório de saída para artigos (default: dados/04_artigos_problemas)"
     )
     parser.add_argument(
         "--output",
@@ -161,6 +176,8 @@ Exemplos:
     # Cria e executa o agente
     agent = SocietalProblemAgent(
         base_dir=args.dir,
+        output_dir=args.output_dir,
+        artigos_dir=args.artigos_dir,
         llm_evaluator=llm_evaluator,
         llm_writer=llm_writer,
         verbose=not args.silencioso,

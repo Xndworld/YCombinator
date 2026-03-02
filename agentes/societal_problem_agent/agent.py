@@ -53,6 +53,8 @@ class SocietalProblemAgent:
     def __init__(
         self,
         base_dir: str = ".",
+        output_dir: Optional[str] = None,
+        artigos_dir: Optional[str] = None,
         llm_evaluator: Optional[Callable] = None,
         llm_writer: Optional[Callable] = None,
         verbose: bool = True,
@@ -60,6 +62,8 @@ class SocietalProblemAgent:
         """
         Args:
             base_dir: Diretório base onde estão os CSVs de entrada.
+            output_dir: Diretório para saída de rankings (default: base_dir).
+            artigos_dir: Diretório para saída de artigos (default: base_dir/artigos).
             llm_evaluator: Função LLM para avaliação de critérios.
                           Assinatura: (prompt: str) -> str
             llm_writer: Função LLM para geração de artigos.
@@ -67,11 +71,13 @@ class SocietalProblemAgent:
             verbose: Se True, imprime progresso detalhado.
         """
         self.base_dir = base_dir
+        self.output_dir = output_dir or base_dir
+        self.artigos_dir = artigos_dir or os.path.join(base_dir, "artigos")
         self.verbose = verbose
 
         self.scoring_engine = ScoringEngine(llm_evaluator=llm_evaluator)
         self.article_writer = ArticleWriter(llm_writer=llm_writer)
-        self.csv_handler = CSVHandler(base_dir=base_dir)
+        self.csv_handler = CSVHandler(base_dir=base_dir, output_dir=self.output_dir)
 
         self.problemas = []
         self.scores = []
@@ -214,7 +220,7 @@ class SocietalProblemAgent:
         )
 
         # Exportar artigos individuais
-        artigos_dir = os.path.join(self.base_dir, "artigos")
+        artigos_dir = self.artigos_dir
         os.makedirs(artigos_dir, exist_ok=True)
 
         artigos_exportados = 0
