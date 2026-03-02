@@ -65,6 +65,10 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 
+# Adiciona agentes/ ao path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from banco_dados import BancoDados
+
 # Raiz do projeto
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -95,8 +99,8 @@ AGENTES = {
     },
     "brainstorm": {
         "nome": "Brainstorm & Problem Solving (5 agentes)",
-        "modulo": "agentes.brainstorm",
-        "status": "placeholder",
+        "modulo": "agentes.brainstorm.brainstorm_agent",
+        "status": "implementado",
         "etapas": [5],
     },
     "banca_redbull": {
@@ -205,6 +209,29 @@ class Orquestrador:
             etapas_str = ", ".join(str(e) for e in agente["etapas"])
             print(f"  {icone} {agente['nome']:<45} (Etapas: {etapas_str})")
 
+        # Banco JSON centralizado
+        print("\n" + "-" * 70)
+        print("  BANCO JSON CENTRALIZADO (dados/banco/)")
+        print("-" * 70)
+        banco = BancoDados()
+        stats = banco.stats()
+        print(f"  Problemas:  {stats['problemas']}")
+        print(f"  Soluções:   {stats['solucoes']}")
+        print(f"  Startups:   {stats['startups']}")
+        print(f"  Bancas:     {stats['avaliacoes_bancas']}")
+
+        if stats['problemas'] > 0:
+            top3 = banco.obter_top_n_problemas(3)
+            print(f"\n  Top 3 problemas:")
+            for p in top3:
+                print(f"    #{p['ranking']} ({p['scores']['pct']}%) {p['titulo'][:50]}")
+
+        if stats['solucoes'] > 0:
+            top3_sol = banco.obter_top_n_solucoes(3)
+            print(f"\n  Top 3 soluções:")
+            for s in top3_sol:
+                print(f"    #{s['ranking']} ({s['score']:.1f}) {s['titulo'][:50]}")
+
         print("=" * 70 + "\n")
 
     def imprimir_diagrama(self):
@@ -276,6 +303,8 @@ class Orquestrador:
             return self._executar_classificacao(**kwargs)
         elif etapa == 4:
             return self._executar_artigos_problemas(**kwargs)
+        elif etapa == 5:
+            return self._executar_brainstorm(**kwargs)
         else:
             print(f"[AVISO] Etapa {etapa} ainda não implementada.")
             return False
@@ -315,6 +344,32 @@ class Orquestrador:
         )
 
         return resultado.get("status") == "sucesso"
+
+    def _executar_brainstorm(self, limite=50, mode="heuristic", **kwargs):
+        """Executa brainstorm para os top N problemas (Etapa 5)."""
+        from agentes.brainstorm.brainstorm_agent import processar_problema
+
+        banco = BancoDados()
+        problemas = banco.obter_top_n_problemas(limite)
+
+        if not problemas:
+            print("[ERRO] Nenhum problema no banco. Execute etapas 2-3 primeiro.")
+            return False
+
+        print(f"Gerando soluções para {len(problemas)} problemas...")
+        total = 0
+        for p in problemas:
+            n = processar_problema(p["id"], mode=mode)
+            total += (n or 0)
+
+        print(f"\nBrainstorm concluído: {total} soluções geradas")
+        top = banco.obter_top_n_solucoes(5)
+        if top:
+            print(f"\nTOP 5 soluções globais:")
+            for s in top:
+                print(f"  #{s['ranking']} ({s['score']:.1f}) {s['titulo'][:50]}")
+
+        return True
 
     def executar_pipeline(self, etapa_inicio=1, etapa_fim=7, **kwargs):
         """Executa o pipeline da etapa_inicio até etapa_fim."""

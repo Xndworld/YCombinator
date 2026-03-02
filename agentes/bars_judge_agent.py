@@ -38,6 +38,9 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 
+# Importa banco de dados central
+from banco_dados import BancoDados, calcular_scores, gerar_tags
+
 try:
     import anthropic
     HAS_ANTHROPIC = True
@@ -626,6 +629,43 @@ def consolidar_banco_geral(base: str) -> list[dict]:
 def gerar_ranking_geral(resultados: list[dict], base: str) -> str:
     """Gera o CSV de ranking geral unificado."""
     return gerar_csv_final(resultados, base, nome_arquivo=BANCO_GERAL_CSV)
+
+
+def sincronizar_com_banco_central(resultados: list[dict]):
+    """Sincroniza os resultados consolidados com o banco JSON centralizado."""
+    banco = BancoDados()
+    data = banco.carregar_problemas()
+
+    # Converte formato batch para formato banco central
+    novos_itens = []
+    for i, r in enumerate(resultados, 1):
+        notas = r.get("notas", {})
+        titulo = r.get("problema", "")
+        descricao = r.get("descricao", "")
+
+        item = {
+            "id": f"P{i:04d}",
+            "titulo": titulo,
+            "descricao": descricao,
+            "desenvolvimento": r.get("desenvolvimento", ""),
+            "batch": r.get("batch", "unknown"),
+            "fonte": r.get("arquivo_fonte", ""),
+            "notas": notas,
+            "scores": calcular_scores(notas),
+            "tags": gerar_tags(titulo, descricao, notas),
+            "ranking": 0,
+        }
+        novos_itens.append(item)
+
+    # Rankear
+    novos_itens.sort(key=lambda x: x["scores"]["pct"], reverse=True)
+    for i, item in enumerate(novos_itens, 1):
+        item["ranking"] = i
+
+    data["itens"] = novos_itens
+    data["total"] = len(novos_itens)
+    banco.salvar_problemas(data)
+    print(f"  Banco central sincronizado: {len(novos_itens)} problemas em dados/banco/problemas.json")
 
 
 # ============================================================================
@@ -1649,6 +1689,7 @@ def cmd_rebuild(args):
     todos = consolidar_banco_geral(base)
     if todos:
         gerar_ranking_geral(todos, base)
+        sincronizar_com_banco_central(todos)
     else:
         print("Nenhum dado encontrado. Avalie batches primeiro.")
         return 1

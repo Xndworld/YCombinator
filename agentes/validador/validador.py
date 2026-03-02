@@ -28,6 +28,10 @@ import sys
 import argparse
 from pathlib import Path
 
+# Adiciona agentes/ ao path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from banco_dados import BancoDados
+
 # Raiz do projeto
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -70,6 +74,11 @@ ESTRUTURA_ESPERADA = {
         "extensoes_esperadas": [".json", ".md", ".csv"],
         "minimo_arquivos": 0,
         "subdiretorios": ["redbull/processo", "ycombinator/ranking_fase2"],
+    },
+    "dados/banco": {
+        "descricao": "Banco JSON centralizado (fonte primária de dados)",
+        "extensoes_esperadas": [".json"],
+        "minimo_arquivos": 1,
     },
 }
 
@@ -286,6 +295,51 @@ class Validador:
             self._log_erro(f"  {os.path.basename(filepath)}: {e}")
             return False
 
+    def verificar_banco_central(self) -> bool:
+        """Verifica integridade do banco JSON centralizado."""
+        print("\n--- Verificando Banco JSON Centralizado ---")
+        tudo_ok = True
+        banco_dir = self._path("dados/banco")
+
+        if not os.path.isdir(banco_dir):
+            self._log_erro("dados/banco/ não existe")
+            return False
+
+        banco = BancoDados()
+        stats = banco.stats()
+
+        # Verifica problemas.json
+        if stats["problemas"] > 0:
+            self._log_ok(f"problemas.json: {stats['problemas']} problemas")
+            # Valida integridade de alguns itens
+            top = banco.obter_top_n_problemas(3)
+            for p in top:
+                if not all(k in p for k in ["id", "titulo", "notas", "scores", "ranking"]):
+                    self._log_erro(f"Problema {p.get('id', '?')} com campos faltantes")
+                    tudo_ok = False
+        else:
+            self._log_aviso("problemas.json: vazio (execute migração)")
+
+        # Verifica solucoes.json
+        if stats["solucoes"] > 0:
+            self._log_ok(f"solucoes.json: {stats['solucoes']} soluções")
+        else:
+            self._log_aviso("solucoes.json: vazio (execute brainstorm)")
+
+        # Verifica startups.json
+        if stats["startups"] > 0:
+            self._log_ok(f"startups.json: {stats['startups']} startups")
+        else:
+            self._log_aviso("startups.json: vazio (etapa futura)")
+
+        # Verifica bancas.json
+        if stats["avaliacoes_bancas"] > 0:
+            self._log_ok(f"bancas.json: {stats['avaliacoes_bancas']} avaliações")
+        else:
+            self._log_aviso("bancas.json: vazio (etapa futura)")
+
+        return tudo_ok
+
     def verificar_tudo(self) -> dict:
         """Executa todas as verificações."""
         print("\n" + "=" * 70)
@@ -297,6 +351,7 @@ class Validador:
             "conteudo": self.verificar_conteudo_etapas(),
             "agentes": self.verificar_agentes(),
             "conexoes": self.verificar_conexoes_pipeline(),
+            "banco_central": self.verificar_banco_central(),
         }
 
         # Resumo
