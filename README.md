@@ -1,15 +1,22 @@
-# YCombinator - Pipeline de Descoberta de Oportunidades
+# RegFlow AI - Pipeline de Descoberta de Oportunidades
 
 Sistema de análise de problemas societais e descoberta de oportunidades de startup,
 usando avaliação multi-critério inspirada em Y Combinator, Lean Startup e VC.
 
-## Pipeline
+## 🚀 Pipeline RegFlow
 
-```
-01_RELATÓRIOS → 02_PROBLEMAS → 03_RANKING → 04_ARTIGOS → 05_BRAINSTORM → 06_STARTUPS → 07_BANCAS
-                                    ↕                          ↕                          ├─ RedBull
-                              dados/banco/              dados/banco/                      └─ YCombinator
+O pipeline é orquestrado de ponta a ponta, transformando dados brutos em soluções avaliadas.
+
+```text
+01_RELATÓRIOS → 02_PROBLEMAS → 03_RANKING → 04_ARTIGOS → 05_BRAINSTORM → 06_STARTUPS
+                                    ↕                          ↕                          
+                              dados/banco/              dados/banco/                      
                             problemas.json            solucoes.json
+
+06_STARTUPS → 07_BANCA_REDBULL → (edital formatado)
+           └─> 08_BANCA_YCOMBINATOR → (ranking fase 2)
+
+09_PROTOCOLO_ATUALIZACAO → re-alimenta etapas 02-08
 ```
 
 | Etapa | Descrição | Status |
@@ -19,14 +26,16 @@ usando avaliação multi-critério inspirada em Y Combinator, Lean Startup e VC.
 | 03 | Ranking de problemas (7 categorias, 55+ critérios) | Concluído |
 | 04 | Artigos analíticos dos top problemas | Concluído (498 artigos) |
 | 05 | Brainstorm: 5 agentes × 5 soluções = 25 por problema | Implementado |
-| 06 | Top 100 soluções → artigos de startup | Placeholder |
-| 07 | Bancas: RedBull (edital) + YCombinator (ranking fase 2) | Placeholder |
+| 06 | Top 100 soluções → artigos de startup | Implementado |
+| 07 | Banca RedBull (formata para edital) | Implementado (Interface BaseBanca) |
+| 08 | Banca YCombinator (ranking fase 2) | Placeholder |
+| 09 | Protocolo de Atualização (novos insights → re-ranking) | Placeholder |
 
-## Banco JSON Centralizado
+## 📦 Banco JSON Centralizado
 
 Todos os agentes leem e escrevem em `dados/banco/` - **fonte única de dados**.
 
-```
+```text
 dados/banco/
 ├── problemas.json    # 498 problemas com 50 métricas, scores, tags, ranking
 ├── solucoes.json     # Soluções de brainstorm com ranking automático (top 100)
@@ -35,120 +44,71 @@ dados/banco/
 ```
 
 **Economia de tokens**: Agentes usam contexto compacto (~200 tokens) em vez de
-ler artigos completos (~4000 tokens). Rankings são pré-computados.
-Artigos .md existem para leitura humana, agentes usam o JSON.
+ler artigos completos (~4000 tokens). Artigos .md existem para leitura humana, agentes usam o JSON.
 
-## Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
-```
+```text
 YCombinator/
-├── dados/
-│   ├── banco/                      # BANCO CENTRAL (fonte primária)
-│   │   ├── problemas.json          # 498 problemas rankeados
-│   │   ├── solucoes.json           # Soluções com ranking top 100
-│   │   ├── startups.json           # Artigos de startup
-│   │   └── bancas.json             # Avaliações das bancas
-│   ├── 01_relatorios/              # Relatórios fonte (.md + .docx)
-│   ├── 02_problemas/               # Problemas + batches + CSVs (legado)
-│   ├── 03_ranking_problemas/       # Rankings CSV (legado)
-│   ├── 04_artigos_problemas/       # 498 artigos .md (leitura humana)
-│   ├── 05_brainstorm_solucoes/     # [Futuro] Soluções exportadas
-│   ├── 06_artigos_startups/        # [Futuro] Artigos de startup
-│   └── 07_bancas/                  # [Futuro] RedBull + YCombinator
-│
+├── orquestrador/
+│   └── main.py              # CÉREBRO DO SISTEMA (Gerencia o fluxo)
 ├── agentes/
-│   ├── banco_dados.py              # Módulo central de acesso a dados
-│   ├── migrar_dados.py             # Script de migração
-│   ├── societal_problem_agent/     # Classificador de problemas
-│   ├── bars_judge_agent.py         # Avaliador batch
-│   ├── brainstorm/                 # 5 agentes de brainstorm
-│   ├── orquestrador/               # Orquestrador do pipeline
-│   ├── validador/                  # Validador de integridade
-│   ├── banca_redbull/              # Banca RedBull [Placeholder]
-│   └── banca_ycombinator/          # Banca YCombinator [Placeholder]
-│
-├── requirements.txt
-└── README.md
+│   ├── rankers/
+│   │   └── yc_ranker/       # Avaliação de problemas (YC Framework)
+│   ├── articuladores/       # Geração de ideias e artigos
+│   ├── bancas/
+│   │   ├── base_banca.py    # Interface Abstrata para novos editais
+│   │   └── redbull/         # Avaliação específica Red Bull Basement
+│   └── nao_mapeados/        # Pasta de transição para agentes legados
+├── database/
+│   └── db_writer.py         # Módulo central de acesso a dados
+├── dados/
+│   ├── banco/               # BANCO CENTRAL (fonte primária)
+│   ├── 01_relatorios/       # Relatórios fonte
+│   └── 04_artigos_problemas/# 498 artigos .md (leitura humana)
+├── relatorios/              # CSVs e rankings exportados
+└── artigos/                 # Artigos de startup gerados
 ```
 
-## Agentes
+## 🤖 Agentes e Comandos
 
-### Banco de Dados Central (`agentes/banco_dados.py`)
+O sistema é operado através do **Orquestrador Central**:
 
-Módulo compartilhado que todos os agentes importam. Provê:
-- `BancoDados.obter_top_n_problemas(50)` - top N problemas
-- `BancoDados.contexto_para_brainstorm(id)` - contexto compacto (~200 tokens)
-- `BancoDados.adicionar_solucoes(lista, problema_id)` - salva + re-rankeia
-- `BancoDados.obter_top_n_solucoes(100)` - top 100 soluções
-- `BancoDados.stats()` - estatísticas do banco
-
-### Classificador de Problemas (`agentes/societal_problem_agent/`)
-
-Avalia problemas com framework de 7 categorias e 55+ critérios.
-Salva direto no banco central.
-
+### Execução Geral
 ```bash
-python -m agentes.societal_problem_agent.main --limite 10
+python orquestrador/main.py run-all --limite 10
 ```
 
-### Avaliador Batch (`agentes/bars_judge_agent.py`)
-
-Sistema de batches para avaliação incremental. Sincroniza com banco central.
-
+### Ranker de Problemas (`agentes/rankers/yc_ranker/`)
+Avalia batches de problemas com frameworks YC/Lean.
 ```bash
-python agentes/bars_judge_agent.py status
-python agentes/bars_judge_agent.py rebuild   # sincroniza com banco central
+python orquestrador/main.py rank --batch "2026-03-01_initial"
 ```
 
-### Brainstorm (`agentes/brainstorm/`)
-
-5 ângulos (Tecnológico, Modelo Negócio, Social, Regulatório, Infraestrutura).
-Gera soluções direto no `solucoes.json` com ranking automático.
-
+### Articulador de Ideias (`agentes/articuladores/`)
+Transforma problemas em ideias de startup e gera artigos analíticos.
 ```bash
-python -m agentes.brainstorm.brainstorm_agent --problema P0001
-python -m agentes.brainstorm.brainstorm_agent --top 50
-python -m agentes.brainstorm.brainstorm_agent --top 10 --mode api
+python orquestrador/main.py articulate --limite 10
 ```
 
-### Orquestrador (`agentes/orquestrador/`)
-
-Gerencia pipeline + mostra status do banco central.
-
+### Banca Avaliadora (`agentes/bancas/redbull/`)
+Avalia as ideias de startup contra editais específicos (ex: Red Bull Basement).
 ```bash
-python -m agentes.orquestrador.orquestrador status
-python -m agentes.orquestrador.orquestrador diagram
-python -m agentes.orquestrador.orquestrador run --etapa 5
+python orquestrador/main.py evaluate --limite 5
 ```
 
-### Validador (`agentes/validador/`)
+## 🛠️ Setup
 
-Verifica integridade do pipeline + banco central.
+1. **Instalação das dependências**:
+   ```bash
+   pip install -r requirements.txt
+   npm install -g @anthropic-ai/claude-code
+   ```
 
-```bash
-python -m agentes.validador.validador check
-```
+2. **Chaves de API**:
+   ```bash
+   export ANTHROPIC_API_KEY='sua-chave'
+   ```
 
-### A Implementar
-
-- **Banca RedBull** (formata para edital) - Etapa 7
-- **Banca YCombinator** (ranking fase 2) - Etapa 7
-- **Protocolo de Atualização** - Novos insights → re-ranking automático
-
-## Fluxo de Atualização (Futuro)
-
-```
-Novo Insight → Classificação → Top 50? ─┬─ SIM → Brainstorm (5×5=25 soluções)
-                                         └─ NÃO → problemas.json (banco)
-
-Brainstorm → 25 soluções → Top 100? ─┬─ SIM → Artigo Startup → Bancas
-                                      └─ NÃO → solucoes.json (banco)
-```
-
-## Setup
-
-```bash
-pip install -r requirements.txt
-python agentes/migrar_dados.py              # Migra dados para banco central
-export ANTHROPIC_API_KEY='sua-chave'        # Opcional: para avaliação via LLM
-```
+3. **Verificação**:
+   Execute o orquestrador para garantir que a estrutura está correta.
