@@ -21,10 +21,15 @@ Baseado nas metodologias de:
 """
 
 import os
+import sys
 import time
 import json
 from datetime import datetime
 from typing import Optional, Callable
+
+# Adiciona o diretório pai ao path para importar banco_dados
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from banco_dados import BancoDados, calcular_scores, gerar_tags
 
 from .config import (
     SCORING_FRAMEWORK,
@@ -53,6 +58,8 @@ class SocietalProblemAgent:
     def __init__(
         self,
         base_dir: str = ".",
+        output_dir: Optional[str] = None,
+        artigos_dir: Optional[str] = None,
         llm_evaluator: Optional[Callable] = None,
         llm_writer: Optional[Callable] = None,
         verbose: bool = True,
@@ -60,6 +67,8 @@ class SocietalProblemAgent:
         """
         Args:
             base_dir: Diretório base onde estão os CSVs de entrada.
+            output_dir: Diretório para saída de rankings (default: base_dir).
+            artigos_dir: Diretório para saída de artigos (default: base_dir/artigos).
             llm_evaluator: Função LLM para avaliação de critérios.
                           Assinatura: (prompt: str) -> str
             llm_writer: Função LLM para geração de artigos.
@@ -67,11 +76,13 @@ class SocietalProblemAgent:
             verbose: Se True, imprime progresso detalhado.
         """
         self.base_dir = base_dir
+        self.output_dir = output_dir or base_dir
+        self.artigos_dir = artigos_dir or os.path.join(base_dir, "artigos")
         self.verbose = verbose
 
         self.scoring_engine = ScoringEngine(llm_evaluator=llm_evaluator)
         self.article_writer = ArticleWriter(llm_writer=llm_writer)
-        self.csv_handler = CSVHandler(base_dir=base_dir)
+        self.csv_handler = CSVHandler(base_dir=base_dir, output_dir=self.output_dir)
 
         self.problemas = []
         self.scores = []
@@ -194,7 +205,7 @@ class SocietalProblemAgent:
 
     def exportar(self, output_filename: str = "ranking_final.csv") -> dict:
         """
-        Etapa 5: Exporta CSV unitário final.
+        Etapa 5: Exporta resultados para banco JSON centralizado + CSV.
 
         Returns:
             Dicionário com caminhos dos arquivos gerados.
@@ -203,34 +214,19 @@ class SocietalProblemAgent:
         self.log("ETAPA 5: EXPORTANDO RESULTADOS")
         self.log("=" * 60)
 
-        # CSV completo
+        # 1. Salva no banco JSON centralizado (fonte primária de dados)
+        problemas_salvos = self._salvar_no_banco()
+        self.log(f"  Banco JSON: {problemas_salvos} problemas salvos em dados/banco/problemas.json")
+
+        # 2. CSV completo (mantido para compatibilidade)
         csv_completo = self.csv_handler.exportar_csv_completo(
             self.scores, output_filename
         )
 
-        # CSV resumo
+        # 3. CSV resumo
         csv_resumo = self.csv_handler.exportar_resumo(
             self.scores, "ranking_resumo.csv"
         )
-
-        # Exportar artigos individuais
-        artigos_dir = os.path.join(self.base_dir, "artigos")
-        os.makedirs(artigos_dir, exist_ok=True)
-
-        artigos_exportados = 0
-        for score in self.scores:
-            if score.artigo:
-                # Sanitiza o nome do arquivo
-                safe_name = "".join(
-                    c if c.isalnum() or c in (" ", "-", "_") else "_"
-                    for c in score.problema_titulo[:80]
-                ).strip()
-                filename = f"{score.ranking:03d}_{safe_name}.md"
-                filepath = os.path.join(artigos_dir, filename)
-
-                with open(filepath, "w", encoding="utf-8") as f:
-                    f.write(score.artigo)
-                artigos_exportados += 1
 
         self.stats["tempo_fim"] = time.time()
         self.stats["tempo_total_segundos"] = (
@@ -240,16 +236,62 @@ class SocietalProblemAgent:
         )
 
         self.log(f"\nArquivos gerados:")
+        self.log(f"  Banco JSON: dados/banco/problemas.json ({problemas_salvos} itens)")
         self.log(f"  CSV Completo: {csv_completo}")
         self.log(f"  CSV Resumo: {csv_resumo}")
-        self.log(f"  Artigos: {artigos_exportados} em {artigos_dir}/")
 
         return {
+            "banco_json": problemas_salvos,
             "csv_completo": csv_completo,
             "csv_resumo": csv_resumo,
-            "artigos_dir": artigos_dir,
-            "artigos_exportados": artigos_exportados,
         }
+
+    def _salvar_no_banco(self) -> int:
+        """Salva todos os scores avaliados no banco JSON centralizado."""
+        banco = BancoDados()
+        data = banco.carregar_problemas()
+        itens_existentes = {item["titulo"]: item for item in data.get("itens", [])}
+
+        novos_itens = []
+        for score in self.scores:
+            # Converte ProblemScore para formato do banco
+            notas = {}
+            for cat_key, cat_score in score.categorias.items():
+                for crit in cat_score.criterios:
+                    notas[crit.criterio_key] = crit.nota
+
+            scores_calc = calcular_scores(notas)
+            tags = gerar_tags(
+                score.problema_titulo,
+                score.problema_descricao,
+                notas,
+            )
+
+            item = {
+                "id": itens_existentes.get(score.problema_titulo, {}).get(
+                    "id", f"P{score.problema_id:04d}"
+                ),
+                "titulo": score.problema_titulo,
+                "descricao": score.problema_descricao,
+                "desenvolvimento": score.problema_desenvolvimento,
+                "batch": "avaliacao_pipeline",
+                "fonte": "societal_problem_agent",
+                "notas": notas,
+                "scores": scores_calc,
+                "tags": tags,
+                "ranking": 0,
+            }
+            novos_itens.append(item)
+
+        # Rankear
+        novos_itens.sort(key=lambda x: x["scores"]["pct"], reverse=True)
+        for i, item in enumerate(novos_itens, 1):
+            item["ranking"] = i
+
+        data["itens"] = novos_itens
+        data["total"] = len(novos_itens)
+        banco.salvar_problemas(data)
+        return len(novos_itens)
 
     def executar_pipeline_completo(
         self,

@@ -1,0 +1,154 @@
+{
+ "versao": "1.0",
+ "total": 5,
+ "itens": [
+  {
+   "titulo": "Plataforma IA para agua",
+   "resumo": "Solução tecnológico para Estresse hídrico crônico em megacidades",
+   "proposta_valor": "Resolve Estresse hídrico crônico em me via abordagem tecnológico",
+   "mercado_alvo": "B2B",
+   "modelo_receita": "SaaS",
+   "diferencial": "Abordagem tecnológico única para o problema",
+   "metricas": {
+    "inovacao": 7,
+    "viabilidade": 7,
+    "tam_potencial": 7,
+    "diferenciacao": 6,
+    "velocidade_mvp": 7,
+    "defensibilidade": 6
+   },
+   "tipo": "tecnológico",
+   "id": "S00001",
+   "problema_id": "P0001",
+   "agente": 1,
+   "criado_em": "2026-03-02T19:11:23.221188",
+   "score": 66.7,
+   "ranking": 1
+  },
+  {
+   "titulo": "API de dados para agua",
+   "resumo": "Solução tecnológico para Estresse hídrico crônico em megacidades",
+   "proposta_valor": "Resolve Estresse hídrico crônico em me via abordagem tecnológico",
+   "mercado_alvo": "B2B",
+   "modelo_receita": "SaaS",
+   "diferencial": "Abordagem tecnológico única para o problema",
+   "metricas": {
+    "inovacao": 6,
+    "viabilidade": 8,
+    "tam_potencial": 6,
+    "diferenciacao": 5,
+    "velocidade_mvp": 8,
+    "defensibilidade": 5
+   },
+   "tipo": "tecnológico",
+   "id": "S00003",
+   "problema_id": "P0001",
+   "agente": 1,
+   "criado_em": "2026-03-02T19:11:23.221215",
+   "score": 63.3,
+   "ranking": 2
+  },
+  {
+   "titulo": "Automação ML de agua",
+   "resumo": "Solução tecnológico para Estresse hídrico crônico em megacidades",
+   "proposta_valor": "Resolve Estresse hídrico crônico em me via abordagem tecnológico",
+   "mercado_alvo": "B2B",
+   "modelo_receita": "SaaS",
+   "diferencial": "Abordagem tecnológico única para o problema",
+   "metricas": {
+    "inovacao": 7,
+    "viabilidade": 6,
+    "tam_potencial": 7,
+    "diferenciacao": 6,
+    "velocidade_mvp": 6,
+    "defensibilidade": 6
+   },
+   "tipo": "tecnológico",
+   "id": "S00004",
+   "problema_id": "P0001",
+   "agente": 1,
+   "criado_em": "2026-03-02T19:11:23.221217",
+   "score": 63.3,
+   "ranking": 3
+  },
+  {
+   "titulo": "Sensor IoT de agua",
+   "resumo": "Solução tecnológico para Estresse hídrico crônico em megacidades",
+   "proposta_valor": "Resolve Estresse hídrico crônico em me via abordagem tecnológico",
+   "mercado_alvo": "B2B",
+   "modelo_receita": "subscription",
+   "diferencial": "Abordagem tecnológico única para o problema",
+   "metricas": {
+    "inovacao": 6,
+    "viabilidade": 6,
+    "tam_potencial": 6,
+    "diferenciacao": 7,
+    "velocidade_mvp": 5,
+    "defensibilidade": 7
+   },
+   "tipo": "tecnológico",
+   "id": "S00002",
+   "problema_id": "P0001",
+   "agente": 1,
+   "criado_em": "2026-03-02T19:11:23.221212",
+   "score": 61.7,
+   "ranking": 4
+  },
+  {
+   "titulo": "Dashboard analytics agua",
+   "resumo": "Solução tecnológico para Estresse hídrico crônico em megacidades",
+   "proposta_valor": "Resolve Estresse hídrico crônico em me via abordagem tecnológico",
+   "mercado_alvo": "B2B",
+   "modelo_receita": "SaaS",
+   "diferencial": "Abordagem tecnológico única para o problema",
+   "metricas": {
+    "inovacao": 5,
+    "viabilidade": 8,
+    "tam_potencial": 5,
+    "diferenciacao": 4,
+    "velocidade_mvp": 8,
+    "defensibilidade": 4
+   },
+   "tipo": "tecnológico",
+   "id": "S00005",
+   "problema_id": "P0001",
+   "agente": 1,
+   "criado_em": "2026-03-02T19:11:23.221219",
+   "score": 56.7,
+   "ranking": 5
+  }
+ ],
+ "top_100": [
+  {
+   "id": "S00001",
+   "titulo": "Plataforma IA para agua",
+   "score": 66.7,
+   "problema_id": "P0001"
+  },
+  {
+   "id": "S00003",
+   "titulo": "API de dados para agua",
+   "score": 63.3,
+   "problema_id": "P0001"
+  },
+  {
+   "id": "S00004",
+   "titulo": "Automação ML de agua",
+   "score": 63.3,
+   "problema_id": "P0001"
+  },
+  {
+   "id": "S00002",
+   "titulo": "Sensor IoT de agua",
+   "score": 61.7,
+   "problema_id": "P0001"
+  },
+  {
+   "id": "S00005",
+   "titulo": "Dashboard analytics agua",
+   "score": 56.7,
+   "problema_id": "P0001"
+  }
+ ],
+ "atualizado_em": "2026-03-02T19:11:23.221395"
+}
