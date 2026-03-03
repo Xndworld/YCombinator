@@ -17,8 +17,9 @@ from .scoring import ProblemScore
 class CSVHandler:
     """Gerencia importação e exportação de dados CSV."""
 
-    def __init__(self, base_dir: str = "."):
+    def __init__(self, base_dir: str = ".", output_dir: str = None):
         self.base_dir = base_dir
+        self.output_dir = output_dir or base_dir
 
     def carregar_problemas(self, arquivos: Optional[list] = None) -> list:
         """
@@ -111,7 +112,8 @@ class CSVHandler:
         Returns:
             Caminho do arquivo gerado.
         """
-        output_path = os.path.join(self.base_dir, output_filename)
+        os.makedirs(self.output_dir, exist_ok=True)
+        output_path = os.path.join(self.output_dir, output_filename)
 
         # Monta os headers
         headers = self._build_headers()
@@ -211,7 +213,8 @@ class CSVHandler:
         Returns:
             Caminho do arquivo gerado.
         """
-        output_path = os.path.join(self.base_dir, output_filename)
+        os.makedirs(self.output_dir, exist_ok=True)
+        output_path = os.path.join(self.output_dir, output_filename)
 
         headers = ["Ranking", "ID", "Problema", "Pontuação Total", "Percentual (%)"]
         for cat_key, category in SCORING_FRAMEWORK.items():
