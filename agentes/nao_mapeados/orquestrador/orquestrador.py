@@ -32,19 +32,19 @@ Gerencia o fluxo completo do pipeline:
         └─> Top 100 soluções viram artigos de startup
             Output: artigos detalhados de oportunidade de negócio
 
-    ETAPA 7: Bancas Avaliadoras (dados/07_bancas/)
-        ├─> Banca RedBull (dados/07_bancas/redbull/)
-        │   └─> Avalia startups, formata para processo/edital RedBull
-        │       Agente: banca_redbull
-        │       Output: processo/ com respostas formatadas
-        │
-        └─> Banca YCombinator (dados/07_bancas/ycombinator/)
-            └─> Avalia startups, gera ranking para fase 2
-                Agente: banca_ycombinator
-                Output: ranking_fase2/
+    ETAPA 7: Banca RedBull (dados/07_banca_redbull/)
+        └─> Avalia startups, formata para processo/edital RedBull
+            Agente: banca_redbull
+            Output: dados/07_banca_redbull/processo/ com respostas formatadas
 
-    [FUTURO] Protocolo de Atualização:
+    ETAPA 8: Banca YCombinator (dados/08_banca_ycombinator/)
+        └─> Avalia startups, gera ranking para fase 2
+            Agente: banca_ycombinator
+            Output: dados/08_banca_ycombinator/ranking_fase2/
+
+    ETAPA 9: Protocolo de Atualização (dados/09_protocolo_atualizacao/)
         └─> Novos insights entram no pipeline
+            Agente: protocolo_atualizacao
             Se rankeado no top 50 → gera artigo + brainstorm
             Se solução no top 100 → gera artigo de startup → bancas
 
@@ -80,7 +80,9 @@ PIPELINE_DIRS = {
     4: ("04_artigos_problemas", "Artigos de Problemas (Top 50)"),
     5: ("05_brainstorm_solucoes", "Brainstorm de Soluções"),
     6: ("06_artigos_startups", "Artigos de Startups (Top 100)"),
-    7: ("07_bancas", "Bancas Avaliadoras (RedBull + YCombinator)"),
+    7: ("07_banca_redbull", "Banca RedBull"),
+    8: ("08_banca_ycombinator", "Banca YCombinator"),
+    9: ("09_protocolo_atualizacao", "Protocolo de Atualização"),
 }
 
 # Agentes disponíveis e seu status
@@ -113,7 +115,13 @@ AGENTES = {
         "nome": "Banca YCombinator",
         "modulo": "agentes.banca_ycombinator",
         "status": "placeholder",
-        "etapas": [7],
+        "etapas": [8],
+    },
+    "protocolo_atualizacao": {
+        "nome": "Protocolo de Atualização",
+        "modulo": "agentes.protocolo_atualizacao",
+        "status": "placeholder",
+        "etapas": [9],
     },
 }
 
@@ -176,7 +184,7 @@ class Orquestrador:
 
     def status_completo(self) -> list:
         """Retorna o status de todas as etapas."""
-        return [self.status_etapa(i) for i in range(1, 8)]
+        return [self.status_etapa(i) for i in range(1, 10)]
 
     def imprimir_status(self):
         """Imprime o status formatado do pipeline."""
@@ -277,19 +285,20 @@ class Orquestrador:
 ║  └──────────┬──────────┘                                            ║
 ║             │                                                       ║
 ║             ▼                                                       ║
+║  ┌─────────────────────┐                                            ║
+║  │  07_BANCA REDBULL   │  Avalia startups → formato edital          ║
+║  │  processo/           │  Respostas formatadas para submissão       ║
+║  └──────────┬──────────┘                                            ║
+║             │                                                       ║
+║  ┌─────────────────────┐                                            ║
+║  │  08_BANCA           │  Avalia startups → ranking investimento    ║
+║  │  YCOMBINATOR        │  Ranking para fase 2                       ║
+║  └──────────┬──────────┘                                            ║
+║             │                                                       ║
 ║  ┌─────────────────────────────────────────────┐                    ║
-║  │  07_BANCAS AVALIADORAS                      │                    ║
-║  │  ┌──────────────────┐ ┌──────────────────┐  │                    ║
-║  │  │  REDBULL          │ │  YCOMBINATOR     │  │                    ║
-║  │  │  → processo/      │ │  → ranking_fase2/│  │                    ║
-║  │  │  Edital formatado │ │  Ranking p/ fase │  │                    ║
-║  │  └──────────────────┘ └──────────────────┘  │                    ║
-║  └─────────────────────────────────────────────┘                    ║
-║                                                                     ║
-║  ┌─────────────────────────────────────────────┐                    ║
-║  │  [FUTURO] PROTOCOLO DE ATUALIZAÇÃO          │                    ║
-║  │  Novo insight → Problema? → Top 50? →       │                    ║
-║  │  Artigo + Brainstorm → Top 100? → Startup   │                    ║
+║  │  09_PROTOCOLO DE ATUALIZAÇÃO                │                    ║
+║  │  Novo insight → Classifica → Top 50? →      │                    ║
+║  │  Brainstorm → Top 100? → Startup → Bancas   │                    ║
 ║  └─────────────────────────────────────────────┘                    ║
 ║                                                                     ║
 ╚══════════════════════════════════════════════════════════════════════╝
@@ -371,7 +380,7 @@ class Orquestrador:
 
         return True
 
-    def executar_pipeline(self, etapa_inicio=1, etapa_fim=7, **kwargs):
+    def executar_pipeline(self, etapa_inicio=1, etapa_fim=9, **kwargs):
         """Executa o pipeline da etapa_inicio até etapa_fim."""
         print("\n" + "=" * 70)
         print("  EXECUTANDO PIPELINE YCOMBINATOR")

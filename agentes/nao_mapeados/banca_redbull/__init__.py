@@ -12,7 +12,7 @@ Responsabilidades:
 
 Pipeline:
     Input:  dados/06_artigos_startups/ (artigos de startup)
-    Output: dados/07_bancas/redbull/processo/ (documentos formatados)
+    Output: dados/07_banca_redbull/processo/ (documentos formatados)
 
 Status: PLACEHOLDER - A ser implementado
 """
