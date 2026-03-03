@@ -12,7 +12,7 @@ Responsabilidades:
 
 Pipeline:
     Input:  dados/06_artigos_startups/ (artigos de startup)
-    Output: dados/07_bancas/ycombinator/ranking_fase2/ (ranking para fase 2)
+    Output: dados/08_banca_ycombinator/ranking_fase2/ (ranking para fase 2)
 
 Status: PLACEHOLDER - A ser implementado (Fase 2)
 """

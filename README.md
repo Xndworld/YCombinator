@@ -6,10 +6,15 @@ usando avaliação multi-critério inspirada em Y Combinator, Lean Startup e VC.
 ## Pipeline
 
 ```
-01_RELATÓRIOS → 02_PROBLEMAS → 03_RANKING → 04_ARTIGOS → 05_BRAINSTORM → 06_STARTUPS → 07_BANCAS
-                                    ↕                          ↕                          ├─ RedBull
-                              dados/banco/              dados/banco/                      └─ YCombinator
+01_RELATÓRIOS → 02_PROBLEMAS → 03_RANKING → 04_ARTIGOS → 05_BRAINSTORM → 06_STARTUPS
+                                    ↕                          ↕
+                              dados/banco/              dados/banco/
                             problemas.json            solucoes.json
+
+06_STARTUPS → 07_BANCA_REDBULL → (edital formatado)
+           └─> 08_BANCA_YCOMBINATOR → (ranking fase 2)
+
+09_PROTOCOLO_ATUALIZACAO → re-alimenta etapas 02-08
 ```
 
 | Etapa | Descrição | Status |
@@ -20,7 +25,9 @@ usando avaliação multi-critério inspirada em Y Combinator, Lean Startup e VC.
 | 04 | Artigos analíticos dos top problemas | Concluído (498 artigos) |
 | 05 | Brainstorm: 5 agentes × 5 soluções = 25 por problema | Implementado |
 | 06 | Top 100 soluções → artigos de startup | Placeholder |
-| 07 | Bancas: RedBull (edital) + YCombinator (ranking fase 2) | Placeholder |
+| 07 | Banca RedBull (formata para edital) | Placeholder |
+| 08 | Banca YCombinator (ranking fase 2) | Placeholder |
+| 09 | Protocolo de Atualização (novos insights → re-ranking) | Placeholder |
 
 ## Banco JSON Centralizado
 
@@ -52,9 +59,11 @@ YCombinator/
 │   ├── 02_problemas/               # Problemas + batches + CSVs (legado)
 │   ├── 03_ranking_problemas/       # Rankings CSV (legado)
 │   ├── 04_artigos_problemas/       # 498 artigos .md (leitura humana)
-│   ├── 05_brainstorm_solucoes/     # [Futuro] Soluções exportadas
-│   ├── 06_artigos_startups/        # [Futuro] Artigos de startup
-│   └── 07_bancas/                  # [Futuro] RedBull + YCombinator
+│   ├── 05_brainstorm_solucoes/     # Soluções exportadas do brainstorm
+│   ├── 06_artigos_startups/        # Artigos de startup (top 100)
+│   ├── 07_banca_redbull/           # Banca RedBull - edital formatado [Placeholder]
+│   ├── 08_banca_ycombinator/       # Banca YCombinator - ranking fase 2 [Placeholder]
+│   └── 09_protocolo_atualizacao/   # Novos insights → re-alimenta pipeline [Placeholder]
 │
 ├── agentes/
 │   ├── banco_dados.py              # Módulo central de acesso a dados
@@ -64,8 +73,9 @@ YCombinator/
 │   ├── brainstorm/                 # 5 agentes de brainstorm
 │   ├── orquestrador/               # Orquestrador do pipeline
 │   ├── validador/                  # Validador de integridade
-│   ├── banca_redbull/              # Banca RedBull [Placeholder]
-│   └── banca_ycombinator/          # Banca YCombinator [Placeholder]
+│   ├── banca_redbull/              # Banca RedBull - Etapa 07 [Placeholder]
+│   ├── banca_ycombinator/          # Banca YCombinator - Etapa 08 [Placeholder]
+│   └── protocolo_atualizacao/      # Protocolo de Atualização - Etapa 09 [Placeholder]
 │
 ├── requirements.txt
 └── README.md
@@ -131,9 +141,9 @@ python -m agentes.validador.validador check
 
 ### A Implementar
 
-- **Banca RedBull** (formata para edital) - Etapa 7
-- **Banca YCombinator** (ranking fase 2) - Etapa 7
-- **Protocolo de Atualização** - Novos insights → re-ranking automático
+- **Banca RedBull** (formata para edital) - Etapa 07 → `dados/07_banca_redbull/`
+- **Banca YCombinator** (ranking fase 2) - Etapa 08 → `dados/08_banca_ycombinator/`
+- **Protocolo de Atualização** - Etapa 09 → novos insights → re-ranking automático
 
 ## Fluxo de Atualização (Futuro)
 

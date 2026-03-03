@@ -69,11 +69,22 @@ ESTRUTURA_ESPERADA = {
         "extensoes_esperadas": [".md"],
         "minimo_arquivos": 0,
     },
-    "dados/07_bancas": {
-        "descricao": "Avaliações das bancas RedBull e YCombinator",
+    "dados/07_banca_redbull": {
+        "descricao": "Banca RedBull - formato edital",
         "extensoes_esperadas": [".json", ".md", ".csv"],
         "minimo_arquivos": 0,
-        "subdiretorios": ["redbull/processo", "ycombinator/ranking_fase2"],
+        "subdiretorios": ["processo"],
+    },
+    "dados/08_banca_ycombinator": {
+        "descricao": "Banca YCombinator - ranking fase 2",
+        "extensoes_esperadas": [".json", ".md", ".csv"],
+        "minimo_arquivos": 0,
+        "subdiretorios": ["ranking_fase2"],
+    },
+    "dados/09_protocolo_atualizacao": {
+        "descricao": "Protocolo de atualização - log de novos insights",
+        "extensoes_esperadas": [".json"],
+        "minimo_arquivos": 0,
     },
     "dados/banco": {
         "descricao": "Banco JSON centralizado (fonte primária de dados)",
@@ -106,8 +117,8 @@ AGENTES_ESPERADOS = {
     },
     "brainstorm": {
         "path": "agentes/brainstorm",
-        "arquivos": ["__init__.py"],
-        "status_esperado": "placeholder",
+        "arquivos": ["__init__.py", "brainstorm_agent.py"],
+        "status_esperado": "implementado",
     },
     "banca_redbull": {
         "path": "agentes/banca_redbull",
@@ -116,6 +127,11 @@ AGENTES_ESPERADOS = {
     },
     "banca_ycombinator": {
         "path": "agentes/banca_ycombinator",
+        "arquivos": ["__init__.py"],
+        "status_esperado": "placeholder",
+    },
+    "protocolo_atualizacao": {
+        "path": "agentes/protocolo_atualizacao",
         "arquivos": ["__init__.py"],
         "status_esperado": "placeholder",
     },
