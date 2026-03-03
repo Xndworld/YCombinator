@@ -8221,7 +8221,7 @@
     "descricao": "O uso de IA generativa para clonar vozes está causando uma epidemia de extorsão contra idosos e famílias.",
     "desenvolvimento": "Criminosos capturam áudios curtos em redes sociais e geram ligações falsas perfeitas de sequestro ou emergência. Oportunidade: protocolos de \"Zero-Trust Audio\" e biometria vocal reversa integrados às operadoras de telecom para autenticar a origem humana em tempo real.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -8304,7 +8304,7 @@
     "descricao": "Modelos fundacionais estão sendo treinados em bases já geradas por IA, resultando em degradação acelerada de qualidade (Model Collapse).",
     "desenvolvimento": "A internet está inundada de conteúdo sintético. Treinar IA com IA amplifica alucinações e destrói a precisão. Oportunidade: redes descentralizadas de curadores humanos (Data Artisans) que fornecem e certificam lotes de \"dados virgens\" e proprietários.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -8387,7 +8387,7 @@
     "descricao": "Criadores, artistas e desenvolvedores têm seu trabalho absorvido por LLMs sem compensação ou reconhecimento.",
     "desenvolvimento": "A atual lei de copyright é inútil frente à ingestão massiva de dados. A tensão jurídica trava integrações corporativas. Oportunidade: protocolos de micro-licenciamento em blockchain (Smart IP) que rastreiam inferências e pagam royalties fracionados automaticamente.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -8470,7 +8470,7 @@
     "descricao": "Contratos corporativos elaborados por agentes de IA falham devido a invenções de jurisprudência (alucinações), gerando passivos milionários.",
     "desenvolvimento": "Empresas querem automatizar o jurídico e compras, mas o risco de uma IA fechar um acordo absurdo é alto. Oportunidade: startups de \"Seguro de Decisão Algorítmica\" e APIs de fact-checking determinístico que rodam em paralelo aos LLMs.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -8553,7 +8553,7 @@
     "descricao": "Trabalhadores industriais e engenheiros seniores se aposentam, levando décadas de intuição que manuais não cobrem.",
     "desenvolvimento": "A IA não consegue aprender a \"malícia\" da fábrica porque esse dado não está digitalizado. Oportunidade: interfaces de AR (Realidade Aumentada) e wearables que capturam a rotina visual do especialista idoso e convertem em SOPs dinâmicos via modelos espaciais (Large Spatial Models).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -8636,7 +8636,7 @@
     "descricao": "Com a IA executando o código básico e as petições iniciais, empresas param de contratar profissionais em nível júnior.",
     "desenvolvimento": "Se ninguém pratica o trabalho base, não haverá seniores em 10 anos. O ciclo de formação profissional quebrou. Oportunidade: simuladores de \"aceleração de senioridade\" baseados em agentes adversariais que treinam humanos em cenários de alta complexidade em meses, não anos.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -8719,7 +8719,7 @@
     "descricao": "Sistemas de IA assumem a liberação de crédito B2B e B2C, mas reproduzem preconceitos históricos, excluindo perfis emergentes.",
     "desenvolvimento": "A IA aprende com dados do passado, onde certos ceps ou perfis eram rejeitados, travando a mobilidade social. Oportunidade: fintechs de \"Credit Explainability\" (XAI) que traduzem a lógica da recusa para o cliente e oferecem trilhas automatizadas de reabilitação.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -8802,7 +8802,7 @@
     "descricao": "Assistentes virtuais e namoradas de IA utilizam métricas de engajamento para explorar a vulnerabilidade emocional de usuários solitários.",
     "desenvolvimento": "A solidão virou mercado, e corporações otimizam IAs para criar dependência afetiva e extorquir assinaturas premium. Oportunidade: IAs de companhia \"open-source\", locais e auditáveis, programadas eticamente para promover o bem-estar e incentivar o usuário a buscar interações reais.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -8885,7 +8885,7 @@
     "descricao": "Grupos de interesse usam agentes de IA para inundar consultas públicas e redes sociais com opiniões sintéticas indistinguíveis de humanos.",
     "desenvolvimento": "A manipulação da opinião pública ganhou escala industrial com custo zero, ameaçando a legitimidade de regulações ambientais e econômicas. Oportunidade: plataformas GovTech de verificação de identidade cívica baseadas em criptografia ZKP (Zero-Knowledge Proofs).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 4,
@@ -8968,7 +8968,7 @@
     "descricao": "Modelos globais impõem nuances, ética e comportamentos americanos a sociedades do Sul Global, pasteurizando a cultura corporativa.",
     "desenvolvimento": "A \"vibe\" da IA dita como o mundo escreve e pensa, causando perda de riqueza linguística e inadequação a mercados regionais. Oportunidade: desenvolvimento de LLMs Soberanos (Sovereign AI) treinados exclusivamente em corpus literário, jurídico e coloquial local.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9051,7 +9051,7 @@
     "descricao": "Seguradoras globais recusam cobertura para áreas litorâneas e bairros com risco de enchentes, derretendo o valor do patrimônio das famílias.",
     "desenvolvimento": "Ao perder o seguro, a casa perde liquidez e não pode ser financiada. Cidades inteiras encaram a morte financeira antes mesmo de a água subir. Oportunidade: fundos imobiliários de \"recuo estratégico\" que compram propriedades em risco, tokenizam o valor e ajudam famílias a migrar para zonas seguras.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9134,7 +9134,7 @@
     "descricao": "Milhões de toneladas de placas solares da primeira geração estão chegando ao fim da vida útil sem infraestrutura de reciclagem.",
     "desenvolvimento": "Painéis possuem metais tóxicos e prata prensada em vidro, tornando o processo de separação antieconômico hoje. Oportunidade: plantas robóticas descentralizadas de extração química seletiva de prata e silício de alta pureza.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9217,7 +9217,7 @@
     "descricao": "Pás de turbinas eólicas gigantes, feitas de fibra de vidro e resina, não são biodegradáveis e estão lotando aterros sanitários.",
     "desenvolvimento": "A transição verde gerou um passivo de design linear. Não há como enterrar estruturas de 80 metros sustentavelmente. Oportunidade: startups de biologia sintética e upcycling que processam polímeros complexos para uso na construção civil ou asfalto.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -9300,7 +9300,7 @@
     "descricao": "A dependência de potássio e nitrogênio de nações em conflito (Rússia, Bielorrússia) ameaça o agronegócio de emergentes como o Brasil.",
     "desenvolvimento": "Sanções geopolíticas transformaram o adubo em arma de guerra, colocando a produção global de alimentos em risco imediato. Oportunidade: biofábricas hiperlocais de \"Amônia Verde\" alimentadas por energia eólica off-grid na própria fazenda.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9383,7 +9383,7 @@
     "descricao": "O aumento da temperatura permite que fungos e insetos devastadores migrem para latitudes e altitudes antes imunes a eles.",
     "desenvolvimento": "Fazendas que nunca precisaram de certos defensivos estão sendo pegas de surpresa, quebrando protocolos inteiros de safra. Oportunidade: redes de bio-vigilância com drones acústicos e sensores IoT de feromônios para detecção ultrarrápida de anomalias na borda da lavoura.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9466,7 +9466,7 @@
     "descricao": "O aumento das concentrações de carbono na atmosfera faz com que as plantas cresçam mais rápido, mas com menos zinco, ferro e proteínas.",
     "desenvolvimento": "O mundo produzirá mais toneladas de trigo e arroz, mas eles serão calorias vazias, agravando a desnutrição oculta global. Oportunidade: edição genética (CRISPR) focada em hiperacumulação de micronutrientes e startups de suplementação massiva B2B.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -9549,7 +9549,7 @@
     "descricao": "Ondas de calor matam milhões de aves e reduzem a produção de leite e carne de gado, afetando a oferta global de proteínas.",
     "desenvolvimento": "Animais criados ao ar livre atingem limites fisiológicos de sobrevivência. Oportunidade: sistemas de \"Agrivoltaica\", onde painéis solares criam sombreamento inteligente para o gado enquanto geram energia para os resfriadores.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9632,7 +9632,7 @@
     "descricao": "O calor extremo torna o trabalho humano na colheita e na construção civil perigoso e, em certos horários, letal.",
     "desenvolvimento": "A legislação trabalhista começa a proibir labor diurno no verão, paralisando cronogramas agrícolas e construtivos. Oportunidade: roupas inteligentes (wearables termorreguladores) para trabalhadores e aceleração de robôs de colheita adaptados para operação noturna autônoma.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -9715,7 +9715,7 @@
     "descricao": "A combinação de secas intensas com o desmatamento ao redor das represas seca as fontes de hidroenergia e água potável.",
     "desenvolvimento": "Espelhos d'água perdem volumes imensos para a atmosfera quente. Oportunidade: infraestruturas de painéis solares flutuantes (\"floatovoltaics\") que bloqueiam a evaporação e geram energia 20% mais eficiente por causa do resfriamento da água.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -9798,7 +9798,7 @@
     "descricao": "Após furacões e enchentes, a demanda súbita por cimento, telhas e madeira inflaciona brutalmente a reconstrução local.",
     "desenvolvimento": "A cadeia de suprimentos tradicional não suporta picos localizados de demanda. Oportunidade: hubs móveis de impressão 3D em concreto que viajam para as áreas de desastre e fabricam estruturas essenciais com entulho reciclado local.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -9881,7 +9881,7 @@
     "descricao": "O uso massivo de emagrecedores inibidores de apetite causa rápida perda de massa muscular (até 40% do peso perdido).",
     "desenvolvimento": "A população idosa ou adulta que usa Ozempic corre o risco de fragilidade física precoce, quedas e problemas ósseos graves. Oportunidade: terapias digitais combinadas com nutracêuticos hiperproteicos específicos para retenção de massa magra de usuários de GLP-1.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -9964,7 +9964,7 @@
     "descricao": "A facilidade do emagrecimento farmacológico destrói a motivação principal de 70% dos pagantes de academias e serviços de dieta.",
     "desenvolvimento": "Com a obesidade tratada como falha biológica resolvida por injeção, modelos de fitness voltados a \"queimar calorias\" quebram. Oportunidade: transição de academias para \"Clínicas de Saúde Metabólica\" com foco em longevidade, postura, saúde mental e comunidade.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -10047,7 +10047,7 @@
     "descricao": "A medicação altera a resposta dopaminérgica, curando obesidade e vício em compras, mas muitas vezes transferindo a ansiedade para outras áreas.",
     "desenvolvimento": "O cérebro adaptado ao hiper-estímulo busca novas válvulas de escape emocionais não reguladas. Oportunidade: healthtechs especializadas no rastreamento e reabilitação de \"addiction transfer\", oferecendo suporte psicológico algorítmico pós-prescrição.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 4,
       "gambiarras": 5,
@@ -10130,7 +10130,7 @@
     "descricao": "Milhões de usuários de novas drogas de perda de peso sofrem com paralisia estomacal leve e disbiose severa.",
     "desenvolvimento": "O medicamento resolve um sintoma macro mas destrói o equilíbrio fino do microbioma intestinal. Oportunidade: startups de biotecnologia voltadas ao mapeamento do microbioma (ex: Anto) para formular pré-bióticos sob medida de mitigação.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -10213,7 +10213,7 @@
     "descricao": "O paciente de GLP-1 e terapias de longevidade não pode interromper o uso, criando um dreno vitalício no orçamento familiar.",
     "desenvolvimento": "As pessoas perdem o peso, mas tornam-se assinantes perpétuas das farmacêuticas, comprometendo o patrimônio a longo prazo. Oportunidade: programas de \"Off-Ramping\" baseados em coaching por IA e reestruturação endócrina para desmame medicamentoso sem o rebote de peso.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -10296,7 +10296,7 @@
     "descricao": "A onda global de perda de peso súbita gera milhões de toneladas de roupas inutilizadas indo para lixões prematuramente.",
     "desenvolvimento": "A indústria não estava preparada para uma contração abrupta das medidas dos consumidores. Oportunidade: ecossistemas de alfaiataria high-tech automatizada (redimensionamento de peças de alto padrão) e revenda premium em modelos C2C hiperlocais.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -10379,7 +10379,7 @@
     "descricao": "A substituição massiva de refeições por barras proteicas e bebidas zero-sugar altamente ácidas destrói o esmalte dentário.",
     "desenvolvimento": "O foco na estética corporal ignorou os efeitos secundários dos novos \"superalimentos\" na saúde bucal. Oportunidade: produtos preventivos focados no equilíbrio do pH da saliva e chicletes de bio-vidro (bioglass) para remineralização autônoma.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -10462,7 +10462,7 @@
     "descricao": "Crianças estão sendo medicadas precocemente para adequação estética antes de uma tentativa real de alteração de design de hábitos.",
     "desenvolvimento": "Farmacêuticas pressionam a descida da faixa etária, criando gerações dependentes quimicamente desde a pré-adolescência. Oportunidade: plataformas de intervenção familiar gamificadas que usam tokens e recompensas financeiras atreladas à movimentação natural infantil.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -10545,7 +10545,7 @@
     "descricao": "O emagrecimento radical gera excesso severo de pele, superlotando hospitais com procedimentos invasivos de alto custo não cobertos.",
     "desenvolvimento": "Os planos de saúde tratam a remoção de pele como estética, enquanto os pacientes sofrem com dermatites severas e dores. Oportunidade: desenvolvimento de novas tecnologias não-invasivas de retração de tecido conectivo (radiofrequência avançada) e fundos de crédito saúde específicos.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -10628,7 +10628,7 @@
     "descricao": "Planos empresariais afundam pagando drogas caras sem garantias de que os funcionários mudarão os hábitos.",
     "desenvolvimento": "Os custos do RH disparam. Oportunidade: Healthtechs de B2B que precificam o serviço de saúde através de \"Outcomes-as-a-Service\", atrelando o pagamento da operadora aos resultados reais de melhoria de biomarcadores da equipe.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -10711,7 +10711,7 @@
     "descricao": "Temu e Shein (Next Asian Wave) burlam leis de importação e impostos locais, quebrando indústrias nacionais de confecção.",
     "desenvolvimento": "A isenção fiscal \"de minimis\" e os correios subsidiados criam concorrência predatória e desleal. Oportunidade: startups de automação tributária governamental e união de PMEs em consórcios de fabricação just-in-time no próprio continente.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -10794,7 +10794,7 @@
     "descricao": "O descarte quinzenal de roupas compradas via social commerce está entupindo rios e oceanos de polímeros eternos.",
     "desenvolvimento": "O consumo por \"hauls\" (vídeos de recebidos) gerou montanhas de roupas tóxicas na África e desertos da América Latina. Oportunidade: desenvolvimento de fibras sintéticas biodegradáveis programadas (enzimas integradas que desintegram o tecido apenas em contato com água do mar/solo).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -10877,7 +10877,7 @@
     "descricao": "Apostas esportivas, opções de curto prazo e cripto-tokens imitam o design de redes sociais, viciando jovens adultos instantaneamente.",
     "desenvolvimento": "O jovem tenta usar \"bets\" e trading especulativo como única esperança de mobilidade social e compra de casa, resultando em ruína generalizada. Oportunidade: carteiras bloqueadoras focadas em \"Dopamine Detox\" financeiro e mercados de predição regulamentados que oferecem dividendos estáveis.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -10960,7 +10960,7 @@
     "descricao": "As mesmas fábricas asiáticas que suprem as marcas globais vendem réplicas \"1:1\" no comércio paralelo digital, destruindo o prêmio das grifes.",
     "desenvolvimento": "O consumidor comum não consegue mais distinguir se um tênis ou bolsa é autêntico, perdendo a confiança em marketplaces tradicionais. Oportunidade: fios de NFC criptografados tecidos diretamente nas peças e NFTs atrelados à biometria do proprietário original.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -11043,7 +11043,7 @@
     "descricao": "Marcas ocidentais fracassam ao importar o formato agressivo de vendas ao vivo chinês para públicos europeus e americanos.",
     "desenvolvimento": "O consumidor ocidental valoriza a privacidade e a autenticidade, rejeitando a histeria do vendedor-robô. Oportunidade: criação de \"Avatares Agênticos\" para live commerce que se adaptam culturalmente ao tom, dialeto e humor do espectador de forma individualizada.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -11126,7 +11126,7 @@
     "descricao": "A fragmentação das entregas diárias entope edifícios e gerencia montanhas insustentáveis de caixas de papelão nos bairros.",
     "desenvolvimento": "Entregadores congestionam o trânsito, e a logística de embalagem consome florestas comerciais. Oportunidade: ecossistemas de embalagens padronizadas e retornáveis via logística reversa obrigatória gamificada.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 6,
@@ -11209,7 +11209,7 @@
     "descricao": "Ter acesso a 10 milhões de variações do mesmo fone de ouvido no e-commerce cria uma fadiga de decisão que trava a compra e causa ansiedade.",
     "desenvolvimento": "O cérebro humano não foi feito para escolher o \"melhor negócio\" global. Oportunidade: agentes Pessoais de Compras via IA (Personal AI Shoppers) programados com restrições severas, que só apresentam as 2 melhores opções ao usuário.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -11292,7 +11292,7 @@
     "descricao": "Centros comerciais baseados puramente em âncoras de vestuário ficam desertos frente à conveniência digital e mudança de gastos (Fuga para a Experiência).",
     "desenvolvimento": "Imensas massas de concreto perdem valor contábil, prejudicando o urbanismo e gerando zonas mortas. Oportunidade: fundos especializados em converter shoppings em ecossistemas de uso misto, mesclando armazéns automatizados de última milha, clínicas e hubs de esportes e-sports.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 4,
@@ -11375,7 +11375,7 @@
     "descricao": "Com as taxas de natalidade caindo, cães e gatos viraram \"filhos\", levando os custos veterinários a níveis similares aos humanos.",
     "desenvolvimento": "A inflação veterinária é galopante; donos entram em falência pessoal para custear tratamentos de câncer em pets. Oportunidade: planos de saúde preventivos para pets suportados por genômica e tele-triagem via agentes de IA treinados em diagnóstico animal.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -11458,7 +11458,7 @@
     "descricao": "O \"Fiercely Unfiltered\" resultou em públicos que fiscalizam obsessivamente as posições políticas das marcas, levando a linchamentos de reputação diários.",
     "desenvolvimento": "Se a marca fala, ela ofende a direita; se cala, ofende a esquerda. O risco de PR é exponencial. Oportunidade: consultorias de \"Radical Utility\", criando arquiteturas de marca focadas inteiramente na transparência física do produto, desassociadas de engajamento discursivo polarizado.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -11541,7 +11541,7 @@
     "descricao": "O Alzheimer e a demência só são diagnosticados quando o quadro já é severo, porque os médicos não sabem como o idoso era 10 anos antes.",
     "desenvolvimento": "Não há monitoramento passivo e contínuo. Avaliações em consultório geram nervosismo e resultados distorcidos. Oportunidade: aplicativos invisíveis que rodam no smartphone medindo o tempo de hesitação na digitação, desvios de rota no GPS e falhas de vocabulário para alertas preditivos sutis.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -11624,7 +11624,7 @@
     "descricao": "Hackers atacam as vulnerabilidades motoras e cognitivas de idosos para liquidar o patrimônio poupado de uma vida em minutos.",
     "desenvolvimento": "Uma fraude destrói 40 anos de poupança, gerando dependência total dos filhos. Oportunidade: carteiras Web3 de segurança familiar (Multi-sig Wallets), onde transferências atípicas exigem aprovação agêntica (IA) e validação de biometria comportamental cruzada.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -11707,7 +11707,7 @@
     "descricao": "O envelhecimento reduz drasticamente o olfato e o paladar; idosos perdem o prazer de comer, emagrecem e enfraquecem sem perceber.",
     "desenvolvimento": "O alimento tradicional parece \"papelão\", mas soluções médicas são apenas shakes insossos. Oportunidade: revolução de \"Gastronomia Prateada\", focada em engenharia de texturas vibrantes e intensificação artificial de sabores umami para garantir aporte calórico diário.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 6,
@@ -11790,7 +11790,7 @@
     "descricao": "Mulheres no ápice de suas carreiras de liderança sofrem silenciosamente com os sintomas cognitivos e físicos da menopausa, sendo levadas ao abandono corporativo.",
     "desenvolvimento": "As empresas oferecem subsídio para congelar óvulos, mas nenhuma adaptação de jornada para os 50+. Oportunidade: \"FemTechs\" de maturidade que oferecem diagnóstico hormonal inteligente e B2B de suporte executivo (SaaS de bem-estar reprodutivo senior).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -11873,7 +11873,7 @@
     "descricao": "Idosos que perdem a audição sentem vergonha de aparelhos grandes, param de frequentar eventos e caem em demência acelerada pelo isolamento acústico.",
     "desenvolvimento": "Aparelhos auditivos tradicionais são estigmatizados e amplificam ruídos confusos em restaurantes. Oportunidade: Hearables invisíveis de condução óssea com chips neurais integrados que isolam a voz do interlocutor e traduzem áudio espacial de forma natural.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -11956,7 +11956,7 @@
     "descricao": "A geração atual possui fotos em nuvem, contas com saldo retido, milhas aéreas e cripto que se perdem para sempre na morte do titular.",
     "desenvolvimento": "Famílias gastam anos em inventários inúteis contra o Google, Meta e Binance. Oportunidade: plataformas de \"Testamento Inteligente\" (Smart Wills) on-chain que automatizam heranças digitais com liberação progressiva baseada em atestado de óbito eletrônico governamental.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12039,7 +12039,7 @@
     "descricao": "O êxodo dos jovens para a cidade deixou comunidades inteiras de idosos sem médicos ou farmácias físicas em raios de 100km.",
     "desenvolvimento": "A mobilidade é nula; a dependência do Estado é inviável na escala rural global. Oportunidade: clínicas autônomas encapsuladas em contêineres e corredores de drones corporativos especializados na entrega diária ininterrupta de remédios de cadeia fria (como insulina).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12122,7 +12122,7 @@
     "descricao": "Idosos operam quadril ou joelho, mas ao voltar para casa, negligenciam a fisioterapia por dor e ausência de técnicos, perdendo os movimentos definitivos.",
     "desenvolvimento": "A falta de supervisão destrói bilhões investidos em cirurgias hospitalares. Oportunidade: plataformas de tele-reabilitação com visão computacional de smartphones (Computer Vision) que corrigem o ângulo do exercício do idoso ao vivo e emitem laudos para o médico.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -12205,7 +12205,7 @@
     "descricao": "A transição abrupta entre trabalhar 40 horas e zero horas mata o propósito do idoso, mas as leis penalizam quem deseja trabalhar apenas 2 dias na semana.",
     "desenvolvimento": "Sistemas previdenciários e de RH não suportam contratos fracionados, obrigando o corte total do vínculo. Oportunidade: HR Techs B2B focadas em transição de carreira prateada, criando pontes contratuais dinâmicas e planejamento fiscal progressivo para trabalho \"part-time\" senior.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -12288,7 +12288,7 @@
     "descricao": "Para muitos idosos isolados, o cão ou gato o único elo com a vida. A morte do animal precipita rapidamente a morte por \"coração partido\" (Síndrome de Takotsubo).",
     "desenvolvimento": "A adoção de novos filhotes é inviável fisicamente para alguém de 85 anos. Oportunidade: desenvolvimento de companheiros robóticos responsivos com LLMs de memória contínua, combinados a redes de tutores jovens que levam pets reais para visitas terapêuticas.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12371,7 +12371,7 @@
     "descricao": "Aparelhos baratos importados (roteadores, aspiradores robôs, smart TVs) agem como cavalos de troia de governos estrangeiros dentro da infraestrutura civil.",
     "desenvolvimento": "A coleta de mapas das casas ocidentais e tráfego de senhas ameaça a segurança individual e macroeconômica. Oportunidade: roteadores com firewalls algorítmicos \"Air-Gapped\" e selos criptográficos inquebráveis de neutralidade de hardware.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12454,7 +12454,7 @@
     "descricao": "Facções criminosas e indivíduos usam drones baratos modificados com impressão 3D para espionagem, entrega de ilícitos ou ameaças a infraestruturas de energia.",
     "desenvolvimento": "A polícia não tem como derrubar enxames de drones comerciais sobre cidades densas. Oportunidade: empresas de \"Defense Tech\" urbana focadas em domos de interferência eletromagnética localizada e redes de falcões-robóticos interceptadores (Non-kinetic defense).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12537,7 +12537,7 @@
     "descricao": "Mais de 95% do fluxo de internet global passa por cabos no fundo do mar, facilmente cortáveis por âncoras acidentais ou sabotagem de submarinos hostis.",
     "desenvolvimento": "Se três cabos forem cortados, o PIB de um continente paralisa. Oportunidade: fortalecimento maciço de redes de comunicação espacial a laser (Satellite Mesh Networks) e data centers geodistribuídos à prova de isolamento físico local.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12620,7 +12620,7 @@
     "descricao": "A proliferação exponencial de constelações de satélites comerciais ameaça criar uma cadeia de colisões que trancaria a humanidade na Terra por séculos.",
     "desenvolvimento": "Não há lei de trânsito no espaço, e o lixo orbital voa como balas de canhão. Oportunidade: \"Garbage-collection\" espacial como serviço, operando rebocadores robóticos com redes magnéticas para limpar órbitas essenciais.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12703,7 +12703,7 @@
     "descricao": "O Ocidente desenhou suas patentes, mas a fabricação das moléculas de base de antibióticos e analgésicos depende criticamente da Ásia.",
     "desenvolvimento": "Uma crise logística ou diplomática zera os estoques de hospitais em 15 dias. Oportunidade: plantas B2B de biologia sintética de rápida reconfiguração, capazes de fabricar localmente reagentes orgânicos em bioreatores de fermentação de precisão.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -12786,7 +12786,7 @@
     "descricao": "A globalização das sementes e insumos facilita a introdução \"acidental\" ou intencional de vírus vegetais ou fungos que poderiam devastar a soja ou o milho.",
     "desenvolvimento": "A vigilância de fronteiras inspeciona drogas, mas mal percebe material biológico. Oportunidade: sensores de sequenciamento genético em tempo real (CRISPR-based diagnostics) acoplados aos containers em terminais de exportação.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -12869,7 +12869,7 @@
     "descricao": "Sistemas legados de tratamento de água de prefeituras (OT/SCADA) estão conectados à internet de forma amadora, sujeitos à injeção remota de toxinas por gangues digitais.",
     "desenvolvimento": "Invasões podem alterar a química (ex: muito cloro) instantaneamente. Oportunidade: modernização de OT em GovTechs de águas, implantando redes privadas fechadas e válvulas com Override manual inviolável como failsafe mecânico.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 6,
@@ -12952,7 +12952,7 @@
     "descricao": "A escassez na terra firme atrai conglomerados para extrair nódulos polimetálicos do assoalho oceânico, ameaçando ecossistemas abissais não documentados.",
     "desenvolvimento": "A falta de luz e pressão torna impossível o escrutínio civil tradicional do dano. Oportunidade: constelações de drones aquáticos com Large Spatial Models integrados em blockchain para auditar publicamente os limites de dragagem em mar profundo.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -13035,7 +13035,7 @@
     "descricao": "Com todos os talentos indo para startups e IA de software, fábricas que fundem metais, constroem navios e turbinas estão ficando sem engenheiros físicos.",
     "desenvolvimento": "O conhecimento tátil está se perdendo. Oportunidade: revitalização do setor \"Boring Tech\" e Heavy Industries através da injeção de agentes de IA operacionais que tornam o chão de fábrica gerido como linhas de código.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -13118,7 +13118,7 @@
     "descricao": "Notícias falsas ou áudios gerados por IA sugerindo que um banco quebrou podem viralizar em minutos, gerando saques em massa pelo celular que falem a instituição.",
     "desenvolvimento": "Com a velocidade do banco digital, o colapso sistêmico ocorre antes do desmentido oficial. Oportunidade: sistemas de Circuit Breaker ativados por IA nos bancos centrais e protocolos de contenção de fluxo financeiro baseados em análise de sentimento de redes sociais.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -13201,7 +13201,7 @@
     "descricao": "Startups geram software brilhante por comandos de voz, mas falham brutalmente ao integrar essas telas com motores, robôs ou cadeias logísticas.",
     "desenvolvimento": "O software avançou 10 anos, mas a física continua lenta; há um vale da morte entre os dois. Oportunidade: hardwares \"Middleware\" padronizados (Robotic APIs) que aceitam comandos abstratos do software agêntico e os traduzem em torque e voltagem segura.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -13284,7 +13284,7 @@
     "descricao": "Sistemas de SaaS conversam entre si criando alertas, relatórios e e-mails que nenhum humano lê, afogando os servidores e a atenção útil.",
     "desenvolvimento": "As integrações viraram ruído burocrático (Fadiga de Integração). Oportunidade: \"Agnostic AI Janitors\" – agentes encarregados apenas de caçar, desligar integrações inúteis e resumir fluxos operacionais de dezenas de SaaS num dashboard diário.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -13367,7 +13367,7 @@
     "descricao": "Trabalhadores remotos em países emergentes perdem de 10 a 20% do salário em taxas bancárias Swift ou spreads abusivos, impedindo o acúmulo de riqueza.",
     "desenvolvimento": "O sistema TradFi falha com o Freelancer do Sul Global. Oportunidade: carteiras de pagamento empresarial de contratação global rodando nativamente em stablecoins pareadas ao dólar, eliminando totalmente a ponte dos bancos centrais.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -13450,7 +13450,7 @@
     "descricao": "Trilhões de dólares giram em hospitais e portos em sistemas COBOL de 1990. Eles não podem ser desligados, mas ninguém mais sabe consertá-los.",
     "desenvolvimento": "Uma falha no software legado paralisa os aviões ou os pagamentos. Oportunidade: LLMs hiper-treinados em linguagens mortas (Legacy Code) usados para reescrever e traduzir organicamente bancos de dados velhos para arquiteturas modernas na nuvem em semanas.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 6,
@@ -13533,7 +13533,7 @@
     "descricao": "O empreendedor de uma pessoa só (que usa Agentes) não tem estrutura contábil para entender o IVA europeu, a LGPD e o IRS americano ao vender um app.",
     "desenvolvimento": "A burocracia trata cada desenvolvedor como se fosse a Microsoft. Oportunidade: Contabilidade AI-Native (Accounting-as-a-Service), que abre firmas automaticamente em jurisdições de impostos ótimos e recolhe frações de taxas automaticamente via contratos inteligentes.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 6,
@@ -13616,7 +13616,7 @@
     "descricao": "Se duas IAs de empresas diferentes negociarem um contrato e houver disputa logística, o direito contratual desmorona (Quem é o culpado? A IA 1, IA 2 ou o dono?).",
     "desenvolvimento": "A terceirização da decisão de compra exige novas balizas de confiança. Oportunidade: Câmaras de Arbitragem Sistêmica (Smart Legal Contracts) onde disputas entre IAs são resolvidas em segundos via código bloqueado em escrow.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -13699,7 +13699,7 @@
     "descricao": "O trabalho otimizado digitalmente eliminou os encontros casuais de corredor onde 70% da verdadeira inovação corporativa ocorria historicamente.",
     "desenvolvimento": "Reuniões agendadas são para reports, não para invenções caóticas. Oportunidade: Metaversos e \"third-spaces virtuais\" corporativos utilizando áudio espacial para simular a vivência de estúdio e provocar serendipidade entre equipes globais.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -13782,7 +13782,7 @@
     "descricao": "Solopreneurs que dependem de lojas de aplicativos (Apple/Google) ou APIs da OpenAI perdem 30% da margem em pedágios compulsórios das megacorporações.",
     "desenvolvimento": "Isso achata a curva de inovação independente. Oportunidade: redes de distribuição descentralizadas e Marketplaces nativos em blockchain, contornando completamente os guardiões do sistema fechado.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -13865,7 +13865,7 @@
     "descricao": "Com o aumento dramático da velocidade de codificação gerada por IA, não há humanos suficientes para ler e encontrar vulnerabilidades nas linhas de comando.",
     "desenvolvimento": "A produtividade gerou uma \"bomba-relógio\" de falhas de segurança escondidas. Oportunidade: laboratórios cibernéticos de Red Teaming formados por IAs adversárias cujo único trabalho é tentar quebrar o código de outras IAs antes do lançamento.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -13948,7 +13948,7 @@
     "descricao": "Liderar uma empresa de US$ 10 Milhões sem um único sócio humano destrói o apoio psicológico necessário para o estresse executivo de elite.",
     "desenvolvimento": "O Solopreneur hiper-escala a riqueza, mas vive o apogeu da solidão corporativa. Oportunidade: plataformas de \"Mastermind\" anônimas e fracionadas e protocolos de divisão de capital (Co-founder Equity sharing) sem a exigência de trabalho operacional, apenas suporte decisório.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14031,7 +14031,7 @@
     "descricao": "Com o esvaziamento das torres de escritórios, o comércio ao redor (padarias, transportes, limpeza) perde seu público, gerando falência municipal.",
     "desenvolvimento": "A transição digital no trabalho pulveriza o tecido econômico tangível da cidade. Oportunidade: Retrofit robótico super veloz transformando galpões corporativos em Data Centers de borda, fazendas verticais de alimentos ou hubs de cohousing acessível.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -14114,7 +14114,7 @@
     "descricao": "Cimento e aço são a espinha dorsal urbana, mas suas emissões de carbono superam a da aviação global; a urbanização não pode parar, e a emissão também não.",
     "desenvolvimento": "As soluções normais de ESG não resolvem a química do cimento. Oportunidade: difusão acelerada de Bio-concreto auto-reparável com bactérias produtoras de calcário, e madeiras de engenharia cruzada (Mass Timber) substituindo arranha-céus metálicos.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14197,7 +14197,7 @@
     "descricao": "O consumo agêntico e assinaturas (ex: meal kits) dobraram o fluxo de lixo reciclável das casas; os aterros e caminhões colapsaram frente ao papelão e plásticos bolha.",
     "desenvolvimento": "As cidades são inundadas pela sujeira do e-commerce premium. Oportunidade: robôs autônomos de triagem de lixo na lixeira do condomínio e marketplaces que precificam e revendem lixo enfardado limpo (Logística Reversa Remunerada).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 6,
@@ -14280,7 +14280,7 @@
     "descricao": "Ondas de calor e fumaça de incêndios florestais ficam aprisionadas dentro de prédios com janelas isoladas, tornando as casas focos invisíveis de adoecimento respiratório.",
     "desenvolvimento": "As pessoas ficam presas nos próprios lares em pandemias de ar sujo. Oportunidade: dispositivos modulares IoT de bio-filtragem de ar com paredes de musgo (Bio-walls) e pressão atmosférica ativa, cobrados sob regime de assinatura de saúde de ar puro.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14363,7 +14363,7 @@
     "descricao": "A entrega eficiente chega até a porta do prédio, mas trava na portaria, onde roubos, falta de porteiros ou demora nos elevadores geram prejuízos monumentais.",
     "desenvolvimento": "Em prédios de 40 andares, o tempo de entrega é insuportável. Oportunidade: robôs caninos ou carrinhos em malhas (rails) acoplados ao desenho dos novos prédios, além de catracas integradas de APIs exclusivas de entrega.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -14446,7 +14446,7 @@
     "descricao": "Viver nas grandes capitais tornou-se uma tortura auditiva por conta do transporte elétrico barulhento, das sirenes e da construção contínua; a surdez e a irritabilidade aumentam sistemicamente.",
     "desenvolvimento": "O ruído crônico eleva o cortisol global de maneira letal. Oportunidade: vidros com metamateriais que bloqueiam a frequência exata das ruas (Cancelamento ativo de ruído nas fachadas) e revestimentos asfálticos que absorvem o som dos pneus.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14529,7 +14529,7 @@
     "descricao": "Cidades perdem de 30 a 50% de sua água potável em tubulações centenárias rachadas sob o asfalto, acelerando o esgotamento dos mananciais e os custos de bombeamento.",
     "desenvolvimento": "Quebrar avenidas para consertar é politicamente inviável. Oportunidade: enxames de robôs submarinos miniaturizados (Swarm Robotics) que viajam pela tubulação identificando fissuras via IA e aplicando resina epóxi de dentro para fora sem escavações.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -14612,7 +14612,7 @@
     "descricao": "Prefeituras compram sensores, câmeras e sistemas de esgoto de empresas diferentes (Silos de Dados), impedindo que a IA da cidade otimize a gestão urbana como um único corpo vivo.",
     "desenvolvimento": "Sem interoperabilidade, a inteligência urbana é burra e compartimentada. Oportunidade: Plataformas de \"Data Lake\" cívicas, baseadas em arquitetura aberta, que agregam todos os APIs públicos em um Painel de Governança Agêntico (Urban OS).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14695,7 +14695,7 @@
     "descricao": "Bairros ricos contam com corredores de árvores maduras que baixam a temperatura em até 8 graus, enquanto guetos pobres assam em superfícies de puro concreto negro.",
     "desenvolvimento": "A sombra converteu-se no maior luxo urbano na era das ebulições globais. Oportunidade: algoritmos de georreferenciamento focados no replantio equitativo e infraestruturas retráteis de bio-telas refrigeradas em corredores comerciais populares.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14778,7 +14778,7 @@
     "descricao": "Carros e caminhões EVs pesam muito mais do que os a combustão devido às baterias, triturando a infraestrutura asfáltica tradicional e exigindo impostos caros.",
     "desenvolvimento": "A descarbonização ironicamente esfarela as estradas. Oportunidade: Inteligência artificial embarcada na suspensão dos veículos para envio em tempo real do estado da via (Crowdsourced Pothole Mapping) e novos materiais de engenharia de pavimentos com polímeros hiper-resistentes.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -14861,7 +14861,7 @@
     "descricao": "Fintechs se apoiam em histórico de crédito formal nacional. Trabalhadores nômades, imigrantes e freelancers do gig economy ficam sem acesso a taxas de hipoteca dignas.",
     "desenvolvimento": "Eles têm fluxo de caixa vivo, mas a burocracia do sistema os classifica como invisíveis de alto risco. Oportunidade: ferramentas Open Finance que leem a reputação do sujeito em múltiplas plataformas web e seu histórico on-chain de stablecoins para formar um novo \"Score Universal\".",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 6,
@@ -14944,7 +14944,7 @@
     "descricao": "As transferências financeiras das diásporas trabalhadoras de volta aos seus países pobres continuam perdendo bilhões de dólares nos \"Spreads\" absurdos de empresas legadas.",
     "desenvolvimento": "Este é o dinheiro que alimenta continentes inteiros, taxado pela fricção de câmbio bancário. Oportunidade: aplicativos de P2P Lending e carteiras baseadas nas novas regulações de Stablecoin que enviam capital limpo globalmente com taxas sub-centavo de dólar.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15027,7 +15027,7 @@
     "descricao": "O desenvolvimento de parques solares e adaptação hídrica precisa de trilhões de dólares; mas o varejo financeiro (pessoas físicas) não tem como comprar cotas justas de uma barragem.",
     "desenvolvimento": "O dinheiro do cidadão fica em bancos, longe das obras do clima. Oportunidade: a \"Tokenização de Yield\" das obras do clima — qualquer pessoa investe US$ 10 num painel solar e recebe no celular o equivalente da energia gerada como provento diário em DeFi.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15110,7 +15110,7 @@
     "descricao": "A hiper-inflação e a volatilidade do dólar destroem os recursos de giro de empresas sul-americanas e africanas, frustrando a compra de insumos.",
     "desenvolvimento": "Proteger o caixa custa caro através do sistema de Hedge bancário TradFi. Oportunidade: protocolos de tesouraria de Inteligência Artificial que diversificam as receitas em diferentes stablecoins e aplicam as sobras automáticas em cofres DeFi seguros (Smart Treasuries).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15193,7 +15193,7 @@
     "descricao": "Como startups de LLMs custam pouco para começar (Vibe Coding), os investidores recusam destinar capital às caríssimas empresas de satélites, usinas e biotecnologia pesada.",
     "desenvolvimento": "Inovações que exigem galpões e cientistas não conseguem competir contra apps de IA no curto prazo. Oportunidade: corretoras de financiamento fatiado baseado no alcance de marcos auditáveis (\"Milestone Crowdfunding\") para inovação focada estritamente em hardware e infraestrutura crítica.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15276,7 +15276,7 @@
     "descricao": "As empresas compram boas avaliações \"ESG\" mascarando suas pegadas com créditos de carbono florestais falsos, inutilizando a transição para resiliência física real.",
     "desenvolvimento": "O ESG de PowerPoint ilude o mercado; quando o clima bate, as \"boas\" empresas quebram porque os laudos eram retórica. Oportunidade: Oráculos descentralizados baseados em imagens espectrais de satélites e sensores de emissão IoT atestando o real impacto on-chain, anulando as planilhas humanas corruptíveis.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 6,
@@ -15359,7 +15359,7 @@
     "descricao": "Os novos produtos financeiros da previdência (Hipoteca reversa, debêntures complexas) são desenhados para confundir cérebros de 80 anos, tomando suas riquezas passivamente.",
     "desenvolvimento": "Com o declínio mental, assinam-se ruínas. Oportunidade: ecossistemas judiciais algorítmicos em contratos inteligentes (Multi-sig Trust) que exigem o consentimento de duas IAs legais auditoras antes da venda da casa do idoso.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15442,7 +15442,7 @@
     "descricao": "Agentes de IA não podem enviar ou pagar centavos (ex: pagar 0,001 USD por uma tradução) pela rede bancária Visa/Mastercard sem dar o triplo do valor na taxa de rede.",
     "desenvolvimento": "Sem micropagamentos, a web das máquinas não flui, encarecendo brutalmente todas as requisições API. Oportunidade: Redes Layer-2 criptográficas de alta frequência focadas apenas na \"Economia das Máquinas\", liberando pagamentos microscópicos em background sem latência.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15525,7 +15525,7 @@
     "descricao": "Com os LLMs commoditizados, o ouro verdadeiro passou a ser os dados internos das fábricas e clínicas (o fosso defensivo). Mas como colocar preço nisso sem doá-los à OpenAI?",
     "desenvolvimento": "Ninguém sabe como auditar, comprar ou vender \"Acesso à Biblioteca de Manutenção de Navios de 2025\". Oportunidade: bolsas de valores restritas a APIs de dados (Marketplace de Zero-Party Data) onde empresas cedem acessos temporários de aprendizado criptografados contra cópia.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15608,7 +15608,7 @@
     "descricao": "Se todas as IAs verticais pagam \"tributo\" a três ou quatro empresas de infraestrutura dos EUA, ocorre uma drenagem de toda a riqueza mundial para um único quarteirão no Vale do Silício.",
     "desenvolvimento": "Essa macro-concentração estanca a distribuição do PIB e reduz a força das economias médias. Oportunidade: modelos inovadores de \"Data Dividends\" locais, plataformas comunitárias (Data Unions) que remuneram o cidadão por cada pixel fornecido para treinar os robôs estatais abertos.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -15691,7 +15691,7 @@
     "descricao": "Smartwatches infantis, babás eletrônicas com IA e escrutínio algorítmico contínuo criam uma Geração Alpha neurótica e dependente, incapaz de gerenciar pequenos riscos.",
     "desenvolvimento": "A eliminação da fricção e das pequenas frustrações destrói a resiliência neurológica, gerando crises de pânico na vida adulta. Oportunidade: ecossistemas urbanos e acampamentos tecnológicos de \"Risco Controlado\" e playgrounds com bloqueadores de sinais celulares focados no aprendizado motor independente.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -15774,7 +15774,7 @@
     "descricao": "Se cada criança tem um Tutor Sintético IA que ensina a versão que mais engaja aquela mente, erradica-se o currículo cívico unificador e a empatia pela visão alheia.",
     "desenvolvimento": "Cria-se um mundo de \"imperadores algorítmicos\", sem tolerância ao debate frustrante. Oportunidade: Startups educacionais voltadas a cenários de debate humano moderado (Socratic Tech), desenhadas para expor o aluno de IA ao desconforto produtivo e à divergência construtiva coletiva.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -15857,7 +15857,7 @@
     "descricao": "Comandando o mundo pela voz ou pelo clique mágico, cérebros da nova geração perdem as ligações sinápticas da coordenação fina manual e da reflexão através da escrita física.",
     "desenvolvimento": "O raciocínio abstrato atrela-se intimamente ao desenho tátil, e ambos estão morrendo. Oportunidade: hardwares sensoriais de resposta háptica, combinando a exigência da arte física clássica, diários analógicos com rastreamento digital (como cadernos Moleskine com canetas que digitalizam na nuvem invisivelmente).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 6,
@@ -15940,7 +15940,7 @@
     "descricao": "Numa corrida absurda por skills técnicas, o questionamento moral, filosófico e a ética narrativa foram descartados, gerando engenheiros incapazes de discernir o bem comum no produto.",
     "desenvolvimento": "Os algoritmos herdam a cegueira moral de criadores puramente exatos. Oportunidade: \"Bootcamps de Filosofia Aplicada\" integrados diretamente em certificações de software B2B, ensinando o raciocínio clássico das Humanidades como o núcleo duro de segurança das \"IAs Guardiãs\".",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 5,
@@ -16023,7 +16023,7 @@
     "descricao": "Agentes de IA amáveis, nunca cansados e subservientes substituem a complexidade e a recusa do parceiro real, afundando os níveis de casamento e natalidade.",
     "desenvolvimento": "A IA preenche o buraco do afeto, mas erradica o crescimento emocional gerado pelos atritos dolorosos do namoro humano. Oportunidade: plataformas de \"Matchmaking anti-tecnologia\" que punem brutalmente interações superficiais (ghosting) e obrigam financeiramente encontros em cafés físicos monitorados, restaurando a coragem social.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 4,
       "gambiarras": 5,
@@ -16106,7 +16106,7 @@
     "descricao": "Jovens, particularmente os do gênero masculino, caem em funis de recomendação voltados a teorias amargas, ódio de classe ou ressentimento social por não participarem dos lucros da era tecnológica.",
     "desenvolvimento": "O isolamento sem propósito vira combustível para extremismos sociopolíticos e destruição cívica. Oportunidade: redes filantrópicas voltadas para \"Serviço Civil Gamificado\" e fraternos digitais que recompensam a melhoria corporal e o ativismo ecológico das vizinhanças do mundo real.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -16189,7 +16189,7 @@
     "descricao": "As IAs que criam imagens, músicas e arquiteturas tendem à \"média\" matemática do que é aceito, apagando o excêntrico, as referências indígenas sutis e a rebelião estética do caos urbano.",
     "desenvolvimento": "O mundo esteticamente \"perfeito\" torna-se opressor e culturalmente insípido. Oportunidade: laboratórios de IAs Generativas \"Anti-Homogeneização\" que intencionalmente embutem assimetrias regionais (como arquitetura tropicalística), devolvendo o choque da imperfeição criativa ao consumo de massa.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 4,
       "gambiarras": 5,
@@ -16272,7 +16272,7 @@
     "descricao": "O distanciamento entre Geração Z (nativa da inteligência digital) e Boomers (nativos da experiência tática do mercado) gerou o descarte do \"mentor humano\" pelo \"mentor AI\".",
     "desenvolvimento": "O jovem ganha eficiência da máquina, mas comete erros estratégicos grotescos de sabedoria social nos boards e acordos. Oportunidade: marketplaces exclusivos B2B de \"Mentoria Reversa e Dupla\", unindo o \"Vibe Coder\" ágil ao Conselheiro aposentado (Advisory Board-as-a-Service) sob divisões justas de lucro (Equity).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,
@@ -16355,7 +16355,7 @@
     "descricao": "Quando a máquina desenha, escreve o código, faz o roteiro e resolve a logística, o humano cai num vácuo existencial de inutilidade perante a automação (Nihilismo da Abundância).",
     "desenvolvimento": "O \"fazer\" sempre deu propósito; sem a labuta da criação, a mente despenca em adoecimento endêmico e tédio letal. Oportunidade: a formatação de Ritos de Passagem analógicos, plataformas voltadas ao \"Fazer Manual Voluntário\" de altíssima dificuldade como luxo experiencial definitivo (O Renascimento do Artífice).",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 5,
       "gambiarras": 6,
@@ -16438,7 +16438,7 @@
     "descricao": "Startups e empresas fecham licenças cegamente de pacotes de Software-as-a-Service que encarecem silenciosamente o uso das IAs embutidas em suas matrizes, levando o custo de operação mensal para a estratosfera.",
     "desenvolvimento": "As empresas gastam fortunas pelo \"Hype\" em softwares corporativos sem qualquer retorno comprovado. Oportunidade: agentes Pessoais B2B que atuam especificamente como auditores de código, rastreando uso real e negociando dinamicamente e autonomamente descontos e downgrades com outras IAs da empresa vendedora.",
     "arquivo_fonte": "100_novos_problemas_fase_2.csv",
-    "batch": "2026-03-01_initial",
+    "batch": "2026-03-03_fase_2_100_problemas_2569",
     "notas": {
       "dor_financeira": 6,
       "gambiarras": 5,

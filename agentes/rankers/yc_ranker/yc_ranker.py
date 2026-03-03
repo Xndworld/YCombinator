@@ -640,37 +640,52 @@ def sincronizar_com_banco_central(resultados: list[dict]):
     """Sincroniza os resultados consolidados com o banco JSON centralizado."""
     banco = BancoDados()
     data = banco.carregar_problemas()
+    itens_existentes = {item["titulo"]: item for item in data.get("itens", [])}
 
-    # Converte formato batch para formato banco central
-    novos_itens = []
-    for i, r in enumerate(resultados, 1):
-        notas = r.get("notas", {})
+    # Converte formato batch para formato banco central e mescla
+    for r in resultados:
         titulo = r.get("problema", "")
-        descricao = r.get("descricao", "")
-
-        item = {
-            "id": f"P{i:04d}",
+        if not titulo:
+            continue
+            
+        notas = r.get("notas", {})
+        item_novo = {
             "titulo": titulo,
-            "descricao": descricao,
+            "descricao": r.get("descricao", ""),
             "desenvolvimento": r.get("desenvolvimento", ""),
             "batch": r.get("batch", "unknown"),
             "fonte": r.get("arquivo_fonte", ""),
             "notas": notas,
             "scores": calcular_scores(notas),
-            "tags": gerar_tags(titulo, descricao, notas),
+            "tags": gerar_tags(titulo, r.get("descricao", ""), notas),
             "ranking": 0,
         }
-        novos_itens.append(item)
+        
+        # Atualiza se já existir, ou adiciona se for novo
+        if titulo in itens_existentes:
+            item_novo["id"] = itens_existentes[titulo]["id"]
+            itens_existentes[titulo] = item_novo
+        else:
+            # Gera novo ID
+            max_id = 0
+            for it in itens_existentes.values():
+                try:
+                    num = int(it["id"][1:])
+                    if num > max_id: max_id = num
+                except: pass
+            item_novo["id"] = f"P{max_id + 1:04d}"
+            itens_existentes[titulo] = item_novo
 
-    # Rankear
-    novos_itens.sort(key=lambda x: x["scores"]["pct"], reverse=True)
-    for i, item in enumerate(novos_itens, 1):
+    # Converte de volta para lista e rankeia o conjunto completo
+    todos = list(itens_existentes.values())
+    todos.sort(key=lambda x: x["scores"]["pct"], reverse=True)
+    for i, item in enumerate(todos, 1):
         item["ranking"] = i
 
-    data["itens"] = novos_itens
-    data["total"] = len(novos_itens)
+    data["itens"] = todos
+    data["total"] = len(todos)
     banco.salvar_problemas(data)
-    print(f"  Banco central sincronizado: {len(novos_itens)} problemas em dados/banco/problemas.json")
+    print(f"  Banco central sincronizado: {len(todos)} problemas totais em dados/banco/problemas.json")
 
 
 # ============================================================================

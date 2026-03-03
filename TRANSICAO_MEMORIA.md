@@ -34,8 +34,10 @@ Realizei um **Merge Semântico** e uma **Reestruturação Arquitetural** profund
 - **Mapeados (Core)**: `agentes/rankers/yc_ranker`, `agentes/articuladores`, `agentes/bancas/redbull`.
 - **Não Mapeados (Legados)**: Movidos para `agentes/nao_mapeados/`. Estes agentes precisam ser revisados para decidir se serão integrados ao novo padrão ou descartados.
 
-### 5. Padronização de Editais
-- Introduzimos a interface `BaseBanca` em `agentes/bancas/base_banca.py`. Qualquer nova banca (YC, RedBull, etc.) deve herdar dela para garantir uniformidade.
+### 6. Integração de Novos Dados (Fase 2)
+- Processamos o arquivo `100_novos_problemas_fase_2.csv` através do novo pipeline.
+- Corrigimos o `yc_ranker.py` para permitir a fusão (append/update) de batches, resultando em um banco consolidado de **598 problemas**.
+- O banco central `dados/banco/problemas.json` agora reflete a união de toda a inteligência coletada até o momento.
 
 ---
 
