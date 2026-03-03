@@ -38,8 +38,13 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 
+# Adiciona raiz ao path para imports absolutos
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
+
 # Importa banco de dados central
-from banco_dados import BancoDados, calcular_scores, gerar_tags
+from database.db_writer import BancoDados, calcular_scores, gerar_tags
 
 try:
     import anthropic
@@ -51,8 +56,8 @@ except ImportError:
 # CONSTANTES DE ESTRUTURA
 # ============================================================================
 
-# Raiz do projeto (calculada a partir da localização deste arquivo em agentes/)
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Raiz do projeto (calculada a partir da localização deste arquivo em agentes/rankers/yc_ranker/)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 
 # Paths relativos à raiz do projeto (usados com os.path.join(base, ...))
 BATCHES_DIR = os.path.join("dados", "02_problemas", "batches")
